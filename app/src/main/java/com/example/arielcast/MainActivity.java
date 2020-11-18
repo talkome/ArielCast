@@ -24,12 +24,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
-        if (v == login){
+        if (v == login)
             welcome.setText("hello user");
-        }
-        if (v == register){
-            welcome.setText("sign in");
-        }
 
+        if (v == register)
+            welcome.setText("sign in");
     }
 }

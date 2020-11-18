@@ -34,17 +34,17 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="168dp"
-        android:layout_height="46dp"
+        android:layout_width="137dp"
+        android:layout_height="22dp"
         android:text="Welcome to ArielCast"
-        tools:layout_editor_absoluteX="121dp"
-        tools:layout_editor_absoluteY="48dp" />
+        tools:layout_editor_absoluteX="135dp"
+        tools:layout_editor_absoluteY="73dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enter"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="472dp" />
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="443dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
