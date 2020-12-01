@@ -1,4 +1,4 @@
-package com.example.arielcast;
+package com.example.arielcast.firebase.model;
 import com.google.firebase.database.DatabaseReference;
 import  com.google.firebase.database.FirebaseDatabase;
 
