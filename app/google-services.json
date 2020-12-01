@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "450379326251",
-    "firebase_url": "https://arielcast-9b784.firebaseio.com",
-    "project_id": "arielcast-9b784",
-    "storage_bucket": "arielcast-9b784.appspot.com"
+    "project_number": "815086185168",
+    "firebase_url": "https://arielcast-634d9.firebaseio.com",
+    "project_id": "arielcast-634d9",
+    "storage_bucket": "arielcast-634d9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:450379326251:android:b7a2683a7c0412df6d1b6e",
+        "mobilesdk_app_id": "1:815086185168:android:b67c3d59dcd06f0cb98cd5",
         "android_client_info": {
-          "package_name": "com.android.application"
+          "package_name": "com.example.arielcast"
         }
       },
       "oauth_client": [
         {
-          "client_id": "450379326251-auifdb6l9t7qc3uhsb69g0c929bl90i0.apps.googleusercontent.com",
+          "client_id": "815086185168-5lpv70njq58748ut60bq8mngq5d4v2aq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDCAT3AyIjvOL4exNEgz_aXWZfQiYUrDnQ"
+          "current_key": "AIzaSyCwrqrCXLvtTqQ_aRqATWMaEUwJ_l8Kfx4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "450379326251-auifdb6l9t7qc3uhsb69g0c929bl90i0.apps.googleusercontent.com",
+              "client_id": "815086185168-5lpv70njq58748ut60bq8mngq5d4v2aq.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
