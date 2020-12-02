@@ -1,10 +1,10 @@
 package com.example.arielcast.firebase.model.dataObject;
 
 public class StudentObj {
-    public String email;
-    public String fname;
-    public  String lname;
-    public String phone;
+     String email;
+     String fname;
+     String lname;
+     String phone;
 
     public StudentObj(String email,String fname,String lname,String phone)
     {
