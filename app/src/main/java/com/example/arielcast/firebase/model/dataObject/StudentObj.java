@@ -5,13 +5,19 @@ public class StudentObj {
      String fname;
      String lname;
      String phone;
+     String password;
 
-    public StudentObj(String email,String fname,String lname,String phone)
+    public StudentObj(String email,String fname,String lname,String phone,String password)
     {
         this.email=email;
         this.fname=fname;
         this.lname=lname;
         this.phone=phone;
+        this.password=password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setEmail(String email) {

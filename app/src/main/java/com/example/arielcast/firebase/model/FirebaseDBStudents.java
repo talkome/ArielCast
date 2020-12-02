@@ -4,9 +4,9 @@ import com.example.arielcast.firebase.model.dataObject.StudentObj;
 import com.google.firebase.database.DatabaseReference;
 
 public class FirebaseDBStudents extends FirebaseBaseModel {
-    public void addStudentToDB(String email,String fname,String lname,String phone)
+    public void addStudentToDB(String email,String fname,String lname,String phone,String password)
     {
-        StudentObj studentReg=new StudentObj(email,fname,lname,phone);
+        StudentObj studentReg=new StudentObj(email,fname,lname,phone,password);
         myRef.child("students").child(email).setValue(studentReg);
     }
 
