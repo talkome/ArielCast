@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,8 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    Button login,register;
-    TextView welcome;
+    private TextView register;
 
     DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
     //DatabaseReference mConditionRef=myRef.child("users");
@@ -27,18 +27,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        login.setOnClickListener(this);
+        register = (TextView) findViewById(R.id.Register);
         register.setOnClickListener(this);
+
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
-        if (v == login)
-            welcome.setText("hello user");
-
-        if (v == register)
-            welcome.setText("sign in");
+        switch (v.getId()){
+            case R.id.Register:
+                startActivity(new Intent(this,RegisterUser.class));
+                break;
+        }
     }
 
 
