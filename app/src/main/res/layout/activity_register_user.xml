@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,31 +12,33 @@
         android:layout_width="380dp"
         android:layout_height="60dp"
         android:fontFamily="sans-serif-black"
-        android:text="ArielCast"
+        android:text="@string/arielcast"
         android:textAlignment="center"
         android:textSize="60sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="81dp" />
+        tools:layout_editor_absoluteY="81dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/register"
         android:layout_width="380dp"
         android:layout_height="60dp"
-        android:text="Register"
+        android:text="@string/register"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="482dp"
-        />
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/emailAdress"
         android:layout_width="380dp"
         android:layout_height="60dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="318dp" />
+        tools:layout_editor_absoluteY="318dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/phone"
@@ -45,17 +48,19 @@
         android:hint="Phone"
         android:inputType="phone"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="244dp" />
+        tools:layout_editor_absoluteY="244dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="380dp"
         android:layout_height="60dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="397dp" />
+        tools:layout_editor_absoluteY="397dp"
+        tools:ignore="MissingConstraints" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -75,7 +80,8 @@
         android:layout_height="60dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Full Name"
+        android:text="@string/full_name"
         tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="173dp" />
+        tools:layout_editor_absoluteY="173dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
