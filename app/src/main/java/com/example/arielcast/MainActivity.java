@@ -2,9 +2,11 @@ package com.example.arielcast;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -99,6 +101,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                    Toast toast=Toast.makeText(MainActivity.this,
+                            "Welcome!",
+                            Toast.LENGTH_LONG);
+
+                    ViewGroup group = (ViewGroup) toast.getView();
+                    TextView messageTextView = (TextView) group.getChildAt(0);
+                    messageTextView.setTextSize(30);
+                    messageTextView.setTextColor(Color.rgb(0,200,150));
+                    toast.show();
 
                 } else {
                     Toast.makeText(MainActivity.this,
@@ -107,7 +118,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-
+/*
+// add this on RegisterUser
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -130,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
             }
-        });
+        });*/
 
     }
 }
