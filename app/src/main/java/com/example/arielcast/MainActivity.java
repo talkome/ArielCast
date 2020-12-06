@@ -11,8 +11,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -89,24 +93,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         progressBar.setVisibility(View.VISIBLE);
-        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                if (user.isEmailVerified()){
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
                     startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+
                 } else {
-                    user.sendEmailVerification();
                     Toast.makeText(MainActivity.this,
-                            "Check your email to verify your account!",Toast.LENGTH_LONG).show();
+                            "Fail to login, please check your credentials",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    assert user != null;
+                    if (user.isEmailVerified()) {
+                        MainActivity.this.startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    } else {
+                        user.sendEmailVerification();
+                        Toast.makeText(MainActivity.this,
+                                "Check your email to verify your account!", Toast.LENGTH_LONG).show();
+                    }
+
+
+                } else {
+                    Toast.makeText(MainActivity.this,
+                            "Failed to login! try again", Toast.LENGTH_LONG).show();
                 }
 
-
-            } else {
-                Toast.makeText(MainActivity.this,
-                        "Failed to login! try again",Toast.LENGTH_LONG).show();
             }
-
         });
 
     }
