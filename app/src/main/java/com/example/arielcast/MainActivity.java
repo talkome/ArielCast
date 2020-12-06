@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+       // progressBar.setVisibility(View.VISIBLE);
 
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -114,8 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (task.isSuccessful()) {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                    if (user == null)
-                        throw new AssertionError();
+                    assert user != null;
                     if (user.isEmailVerified()) {
                         MainActivity.this.startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                     } else {
@@ -123,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this,
                                 "Check your email to verify your account!", Toast.LENGTH_LONG).show();
                     }
+
 
                 } else {
                     Toast.makeText(MainActivity.this,
