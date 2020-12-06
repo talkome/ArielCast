@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Objects;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
+    private TextView banner, registerUser;
     private EditText editTextFullName, editTextEmail, editTextPassword, editTextPhone;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
@@ -31,10 +32,10 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
-        TextView banner = findViewById(R.id.banner);
+        banner = findViewById(R.id.banner);
         banner.setOnClickListener(this);
 
-        TextView registerUser = (Button) findViewById(R.id.register);
+        registerUser = (Button) findViewById(R.id.register);
         registerUser.setOnClickListener(this);
 
         editTextFullName = findViewById(R.id.fullName);
@@ -113,10 +114,13 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                             }
                         });
             } else {
-                Toast.makeText(RegisterUser.this, "Failed to register! try again",Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterUser.this,
+                        "Failed to register! try again",Toast.LENGTH_LONG).show();
                 progressBar.setVisibility(View.GONE);
             }
+
         });
+
     }
 
     @Override

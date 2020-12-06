@@ -32,14 +32,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView register = findViewById(R.id.register);
+        TextView register = findViewById(R.id.register1);
         register.setOnClickListener(this);
 
         Button signIn = findViewById(R.id.signIn);
         signIn.setOnClickListener(this);
 
         editTextEmail = findViewById(R.id.emailAddress);
-        editTextPassword = findViewById(R.id.password);
+        editTextPassword = findViewById(R.id.password1);
 
         progressBar = findViewById(R.id.progressBar);
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.register:
+            case R.id.register1:
                 startActivity(new Intent(this,RegisterUser.class));
                 break;
 

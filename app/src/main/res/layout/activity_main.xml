@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,65 +9,87 @@
 
     <TextView
         android:id="@+id/banner"
-        android:layout_width="380dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="81dp"
+        android:layout_marginEnd="15dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/arielcast"
         android:textAlignment="center"
         android:textSize="60sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="81dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/emailAddress"
-        android:layout_width="380dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="209dp"
+        android:layout_marginEnd="15dp"
         android:ems="10"
         android:hint="@string/email_address"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="209dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/password"
-        android:layout_width="380dp"
+        android:id="@+id/password1"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:ems="10"
         android:layout_margin="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="85dp"
+        android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="305dp"
+        app:layout_constraintBottom_toBottomOf="@+id/signIn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/emailAddress"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/signIn"
-        android:layout_width="380dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="281dp"
         android:text="@string/login"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="390dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/setNewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
         android:text="@string/forgot_password"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="468dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signIn"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/register"
+        android:id="@+id/register1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/register"
-        tools:layout_editor_absoluteX="343dp"
-        tools:layout_editor_absoluteY="468dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signIn"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
