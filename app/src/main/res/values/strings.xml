@@ -11,4 +11,5 @@
     <string name="email">Email</string>
     <string name="register" tools:ignore="DuplicateDefinition">Register</string>
     <string name="arielcast1" tools:ignore="DuplicateDefinition">ArielCast</string>
+    <string name="phone">Phone</string>
 </resources>

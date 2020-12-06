@@ -63,7 +63,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="14dp"
         android:ems="10"
-        android:hint="Phone"
+        android:hint="@string/phone"
         android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@+id/emailAdress"
         app:layout_constraintEnd_toEndOf="parent"
