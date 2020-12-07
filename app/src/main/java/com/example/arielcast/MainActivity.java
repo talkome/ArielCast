@@ -134,8 +134,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-/*
-// add this on RegisterUser
+
+
+/*  // add this on RegisterUser -send email for verify user's account
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -150,8 +151,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this,
                                 "Check your email to verify your account!", Toast.LENGTH_LONG).show();
                     }
-
-
                 } else {
                     Toast.makeText(MainActivity.this,
                             "Failed to login! try again", Toast.LENGTH_LONG).show();
