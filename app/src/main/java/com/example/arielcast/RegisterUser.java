@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.arielcast.firebase.model.FirebaseDBStudents;
+import com.example.arielcast.firebase.model.dataObject.StudentObj;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -52,15 +54,14 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
     @SuppressLint("NonConstantResourceId")
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.banner:
-                startActivity(new Intent(this,MainActivity.class));
-                break;
-
-            case R.id.register:
+    public void onClick(View v)
+    {
+        if(v.getId()==R.id.banner) {
+            startActivity(new Intent(this, MainActivity.class));
+        }
+        else if(v.getId()==R.id.register)
+        {
                 registerUser(v);
-                break;
         }
     }
 
@@ -107,9 +108,12 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-                            User user = new User(fullName, phone, email);
+                            // ADD STUDENT TO DATABASE
+                            FirebaseDBStudents st=new FirebaseDBStudents();
+                            StudentObj user=new StudentObj(email,fullName,phone,password);
+                           // st.addStudentToDB(user);
 
-                            FirebaseDatabase.getInstance().getReference("Users")
+                            FirebaseDatabase.getInstance().getReference("Students")
                                     .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

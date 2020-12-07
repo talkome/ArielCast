@@ -9,6 +9,11 @@ public class FirebaseDBStudents extends FirebaseBaseModel {
         StudentObj studentReg=new StudentObj(email,fullname,phone,password);
         myRef.child("students").child(email).setValue(studentReg);
     }
+    public void addStudentToDB(StudentObj studentObj)
+    {
+        String email=studentObj.getEmail();
+        myRef.child("students").child(email).setValue(studentObj);
+    }
 
     public DatabaseReference getStudentFromDB(String studentID)
     {
