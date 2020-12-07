@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/banner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="389dp"
+        android:layout_height="87dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="81dp"
         android:layout_marginEnd="15dp"
@@ -20,7 +20,7 @@
         android:textAlignment="center"
         android:textSize="60sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/radioButton"
+        app:layout_constraintBottom_toTopOf="@+id/checkLecturer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -96,8 +96,8 @@
         app:layout_constraintTop_toBottomOf="@+id/signIn"
         tools:ignore="MissingConstraints" />
 
-    <RadioButton
-        android:id="@+id/radioButton"
+    <CheckBox
+        android:id="@+id/checkLecturer"
         android:layout_width="140dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
@@ -106,6 +106,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/signIn"
-        app:layout_constraintTop_toBottomOf="@+id/banner" />
+        app:layout_constraintTop_toBottomOf="@+id/banner"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

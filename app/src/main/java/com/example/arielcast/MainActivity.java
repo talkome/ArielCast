@@ -8,6 +8,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.arielcast.firebase.model.dataObject.LecturerObj;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
+    private CheckBox checkBoxL;
 
     DatabaseReference myRef= FirebaseDatabase.getInstance().getReference();
     //DatabaseReference mConditionRef=myRef.child("users");
@@ -45,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         editTextEmail = findViewById(R.id.emailAddress);
         editTextPassword = findViewById(R.id.password1);
-
         progressBar = findViewById(R.id.progressBar);
 
         mAuth = FirebaseAuth.getInstance();
@@ -54,15 +56,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint({"SetTextI18n", "NonConstantResourceId"})
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.register1:
-                startActivity(new Intent(this,RegisterUser.class));
-                break;
 
-            case R.id.signIn:
-                userLogin();
-                break;
+        if (v.getId()==R.id.register1) {
+            startActivity(new Intent(this, RegisterUser.class));
         }
+
+        if(v.getId()==R.id.signIn) {
+            checkBoxL=findViewById(R.id.checkLecturer);
+                if(checkBoxL.isChecked())
+                {
+                    startActivity(new Intent(this,LecturerActivity.class));
+                }
+                else {
+                    userLogin();
+                }
+            }
+
+
     }
 
     private void userLogin() {
