@@ -115,9 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         messageTextView.setTextSize(30);
                         messageTextView.setTextColor(Color.rgb(0, 200, 150));
                         toast.show();
-                    }
-                    else
-                    {
+                    } else {
                         startActivity(new Intent(MainActivity.this, StudentActivity.class));
                         Toast toast = Toast.makeText(MainActivity.this,
                                 "Welcome Student!",
