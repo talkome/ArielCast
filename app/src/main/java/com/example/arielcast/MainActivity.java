@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(checkBoxL.isChecked()) {
                         startActivity(new Intent(MainActivity.this, LecturerActivity.class));
                         Toast toast = Toast.makeText(MainActivity.this,
-                                "Welcomec Lecturer!",
+                                "Welcome Lecturer!",
                                 Toast.LENGTH_LONG);
 
                         ViewGroup group = (ViewGroup) toast.getView();
