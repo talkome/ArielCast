@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +27,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Objects;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
-    private EditText editTextFullName, editTextEmail, editTextPassword, editTextPhone;
+    private EditText editTextFullName, editTextEmail, editTextPassword, editTextPhone,editTextFaculty;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
+    private RadioButton rd;
 
 
     @Override
@@ -48,6 +50,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editTextEmail = findViewById(R.id.emailAdress);
         editTextPassword = findViewById(R.id.password);
         editTextPhone = findViewById(R.id.phone);
+        editTextFaculty=findViewById(R.id.faculty);
 
         progressBar = findViewById(R.id.progressBar);
     }
@@ -146,8 +149,18 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 });
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
+    // RadioButton - I'M lECTURER
+    // ADD EditTextView for Faculty
+    // registerLecturer Function
+ public void rbClick(View v)
+ {
+     rd=findViewById(R.id.rbLecturer);
+     if(rd.isChecked()) {
+         editTextFaculty.setVisibility(View.VISIBLE);
+     }
+     else
+     {
+         editTextFaculty.setVisibility(View.GONE);
+     }
+ }
 }
