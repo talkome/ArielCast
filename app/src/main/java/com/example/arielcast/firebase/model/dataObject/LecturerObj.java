@@ -3,17 +3,15 @@ package com.example.arielcast.firebase.model.dataObject;
 public class LecturerObj {
      String email;
      String password;
-     String fname;
-     String lname;
+     String fullname;
      String phone;
      String faculty;
 
-    public LecturerObj(String email,String password,String fname,String lname,String phone,String faculty)
+    public LecturerObj(String email,String password,String fullname,String phone,String faculty)
     {
         this.email=email;
         this.password=password;
-        this.fname=fname;
-        this.lname=lname;
+        this.fullname=fullname;
         this.phone=phone;
         this.faculty=faculty;
     }
@@ -31,19 +29,11 @@ public class LecturerObj {
     }
 
     public void setFname(String fname) {
-        this.fname = fname;
+        this.fullname = fname;
     }
 
     public String getFname() {
-        return fname;
-    }
-
-    public void setLname(String lname) {
-        this.lname = lname;
-    }
-
-    public String getLname() {
-        return lname;
+        return fullname;
     }
 
     public void setPhone(String phone) {

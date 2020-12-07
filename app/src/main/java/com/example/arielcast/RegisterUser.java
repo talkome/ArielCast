@@ -3,6 +3,7 @@ package com.example.arielcast;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -58,12 +59,12 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.register:
-                registerUser();
+                registerUser(v);
                 break;
         }
     }
 
-    private void registerUser() {
+    private void registerUser(View v) {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         String fullName = editTextFullName.getText().toString().trim();
@@ -118,6 +119,10 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                         Toast.makeText(RegisterUser.this,
                                                 "user has been registered successfully!",
                                                 Toast.LENGTH_LONG).show();
+
+                                        // back to Main Screen - login
+                                        Intent intent = new Intent(v.getContext(), MainActivity.class);
+                                        startActivity(intent);
                                     } else {
                                         Toast.makeText(RegisterUser.this,
                                                 "Failed to register! try again",
