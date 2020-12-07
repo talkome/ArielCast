@@ -16,10 +16,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
-
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="256dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

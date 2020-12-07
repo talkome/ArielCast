@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void userLogin() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        checkBoxL=findViewById(R.id.checkLecturer);
 
         if (email.isEmpty()) {
             editTextEmail.setError("email is required!");
@@ -96,23 +97,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
+
         // progressBar.setVisibility(View.VISIBLE);
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    startActivity(new Intent(MainActivity.this, StudentActivity.class));
-                    Toast toast = Toast.makeText(MainActivity.this,
-                            "Welcome!",
-                            Toast.LENGTH_LONG);
+                    if(checkBoxL.isChecked()) {
+                        startActivity(new Intent(MainActivity.this, LecturerActivity.class));
+                        Toast toast = Toast.makeText(MainActivity.this,
+                                "Welcomec Lecturer!",
+                                Toast.LENGTH_LONG);
 
-                    ViewGroup group = (ViewGroup) toast.getView();
-                    TextView messageTextView = (TextView) group.getChildAt(0);
-                    messageTextView.setTextSize(30);
-                    messageTextView.setTextColor(Color.rgb(0, 200, 150));
-                    toast.show();
+                        ViewGroup group = (ViewGroup) toast.getView();
+                        TextView messageTextView = (TextView) group.getChildAt(0);
+                        messageTextView.setTextSize(30);
+                        messageTextView.setTextColor(Color.rgb(0, 200, 150));
+                        toast.show();
+                    }
+                    else
+                    {
+                        startActivity(new Intent(MainActivity.this, StudentActivity.class));
+                        Toast toast = Toast.makeText(MainActivity.this,
+                                "Welcome Student!",
+                                Toast.LENGTH_LONG);
 
+                        ViewGroup group = (ViewGroup) toast.getView();
+                        TextView messageTextView = (TextView) group.getChildAt(0);
+                        messageTextView.setTextSize(30);
+                        messageTextView.setTextColor(Color.rgb(0, 200, 150));
+                        toast.show();
+                    }
                 } else {
                     Toast.makeText(MainActivity.this,
                             "Fail to login, please check your credentials",
