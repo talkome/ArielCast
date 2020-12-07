@@ -7,6 +7,7 @@ public class LecturerObj {
      String phone;
      String faculty;
 
+
     public LecturerObj(String email,String password,String fullname,String phone,String faculty)
     {
         this.email=email;
@@ -14,6 +15,10 @@ public class LecturerObj {
         this.fullname=fullname;
         this.phone=phone;
         this.faculty=faculty;
+    }
+
+    public LecturerObj() {
+
     }
 
     public void setPassword(String password) {
