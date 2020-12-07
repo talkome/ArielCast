@@ -112,6 +112,18 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
+        if (!phone.startsWith("05")){
+            editTextPhone.setError("Please provide valid phone");
+            editTextFaculty.requestFocus();
+            return;
+        }
+
+        if (phone.length() != 10){
+            editTextPhone.setError("Please provide valid phone");
+            editTextFaculty.requestFocus();
+            return;
+        }
+
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password).
                 addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -262,9 +274,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
      cb=findViewById(R.id.cbLecturer);
      if(cb.isChecked()) {
          editTextFaculty.setVisibility(View.VISIBLE);
-     }
-     else
-     {
+     } else {
          editTextFaculty.setVisibility(View.GONE);
      }
  }
