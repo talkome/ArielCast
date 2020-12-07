@@ -7,6 +7,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -30,7 +31,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private EditText editTextFullName, editTextEmail, editTextPassword, editTextPhone,editTextFaculty;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
-    private RadioButton rd;
+    private CheckBox cb;
 
 
     @Override
@@ -51,8 +52,8 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editTextPassword = findViewById(R.id.password);
         editTextPhone = findViewById(R.id.phone);
         editTextFaculty=findViewById(R.id.faculty);
-
         progressBar = findViewById(R.id.progressBar);
+
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -64,7 +65,17 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         }
         else if(v.getId()==R.id.register)
         {
+            if(!cb.isChecked()) {
                 registerUser(v);
+            }
+            else
+            {
+                Toast.makeText(RegisterUser.this,
+                        "You are lecturer!",
+                        Toast.LENGTH_LONG).show();
+
+                // Call registerLacturer function here !
+            }
         }
     }
 
@@ -154,8 +165,8 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     // registerLecturer Function
  public void rbClick(View v)
  {
-     rd=findViewById(R.id.rbLecturer);
-     if(rd.isChecked()) {
+     cb=findViewById(R.id.cbLecturer);
+     if(cb.isChecked()) {
          editTextFaculty.setVisibility(View.VISIBLE);
      }
      else

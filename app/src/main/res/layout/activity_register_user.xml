@@ -121,8 +121,8 @@
         app:layout_constraintTop_toBottomOf="@+id/banner"
         tools:ignore="MissingConstraints" />
 
-    <RadioButton
-        android:id="@+id/rbLecturer"
+    <CheckBox
+        android:id="@+id/cbLecturer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="116dp"

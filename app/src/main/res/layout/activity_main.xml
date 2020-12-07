@@ -98,9 +98,9 @@
 
     <RadioButton
         android:id="@+id/radioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="304dp"
         android:text="I'm lecturer"
         android:textSize="18sp"
