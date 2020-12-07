@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void userLogin() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-        checkBoxL=findViewById(R.id.checkLecturer);
+        checkBoxL = findViewById(R.id.checkLecturer);
 
         if (email.isEmpty()) {
             editTextEmail.setError("email is required!");
@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editTextPassword.requestFocus();
             return;
         }
-
 
 
         // progressBar.setVisibility(View.VISIBLE);
