@@ -105,26 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (task.isSuccessful()) {
                     if(checkBoxL.isChecked()) {
                         startActivity(new Intent(MainActivity.this, LecturerActivity.class));
-                        Toast toast = Toast.makeText(MainActivity.this,
-                                "Welcome Lecturer!",
-                                Toast.LENGTH_LONG);
-
-                        ViewGroup group = (ViewGroup) toast.getView();
-                        TextView messageTextView = (TextView) group.getChildAt(0);
-                        messageTextView.setTextSize(30);
-                        messageTextView.setTextColor(Color.rgb(0, 200, 150));
-                        toast.show();
                     } else {
                         startActivity(new Intent(MainActivity.this, StudentActivity.class));
-                        Toast toast = Toast.makeText(MainActivity.this,
-                                "Welcome Student!",
-                                Toast.LENGTH_LONG);
-
-                        ViewGroup group = (ViewGroup) toast.getView();
-                        TextView messageTextView = (TextView) group.getChildAt(0);
-                        messageTextView.setTextSize(30);
-                        messageTextView.setTextColor(Color.rgb(0, 200, 150));
-                        toast.show();
                     }
                 } else {
                     Toast.makeText(MainActivity.this,
