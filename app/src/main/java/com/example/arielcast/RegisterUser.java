@@ -35,7 +35,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
     private CheckBox cb;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +52,8 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editTextEmail = findViewById(R.id.emailAdress);
         editTextPassword = findViewById(R.id.password);
         editTextPhone = findViewById(R.id.phone);
-        editTextFaculty=findViewById(R.id.faculty);
+        editTextFaculty = findViewById(R.id.faculty);
         progressBar = findViewById(R.id.progressBar);
-
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -64,9 +62,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     {
         if(v.getId() == R.id.banner) {
             startActivity(new Intent(this, MainActivity.class));
-        }
-        else if(v.getId() == R.id.register)
-        {
+        } else if(v.getId() == R.id.register) {
             cb = findViewById(R.id.cbLecturer);
             if(cb.isChecked()) {
                 registerLecturer(v);

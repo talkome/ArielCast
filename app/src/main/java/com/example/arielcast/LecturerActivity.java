@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -28,36 +27,37 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class LecturerActivity extends AppCompatActivity implements View.OnClickListener{
+public class LecturerActivity extends AppCompatActivity{
     private static final int PICK_VIDEO = 1;
-    Button button;
     VideoView videoView;
+    Button addLec;
     ProgressBar progressBar;
     EditText editText;
     private Uri videoUri;
     MediaController mediaController;
-    Member member;
+    Lecture lecture;
     StorageReference storageReference;
     DatabaseReference databaseReference;
     UploadTask uploadTask;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecturer);
 
-        member = new Member();
-        storageReference = FirebaseStorage.getInstance().getReference("lectures");
-        databaseReference = FirebaseDatabase.getInstance().getReference("lectures");
+        lecture = new Lecture();
+        storageReference = FirebaseStorage.getInstance().getReference("Lectures");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Lectures");
 
-        button = findViewById(R.id.addLectureButton);
+        videoView = findViewById(R.id.videoview_main);
+        addLec = findViewById(R.id.addLectureButton);
         progressBar = findViewById(R.id.progressBar);
+        editText = findViewById(R.id.et_video_name);
         mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
         videoView.start();
 
-        button.setOnClickListener(new View.OnClickListener() {
+        addLec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UploadVideo();
@@ -78,7 +78,7 @@ public class LecturerActivity extends AppCompatActivity implements View.OnClickL
 
     public void ChooseVideo(View view) {
         Intent intent = new Intent();
-        intent.setType("lectures/*");
+        intent.setType("Lectures/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,PICK_VIDEO);
     }
@@ -89,12 +89,8 @@ public class LecturerActivity extends AppCompatActivity implements View.OnClickL
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.addLectureButton) {
-            ChooseVideo(v);
-        }
+
+    public void ShowVideo(View view) {
     }
 
     private void UploadVideo(){
@@ -122,11 +118,11 @@ public class LecturerActivity extends AppCompatActivity implements View.OnClickL
                         progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(LecturerActivity.this,"Data saved",
                                 Toast.LENGTH_SHORT).show();
-                        member.setName(videoName);
-                        member.setVideo_url(downloadUri.toString());
-                        member.setSearch(search);
+                        lecture.setName(videoName);
+                        lecture.setVideo_url(downloadUri.toString());
+                        lecture.setSearch(search);
                         String i = databaseReference.push().getKey();
-                        databaseReference.child(i).setValue(member);
+                        databaseReference.child(i).setValue(lecture);
                     } else {
                         Toast.makeText(LecturerActivity.this,"Failed",
                                 Toast.LENGTH_SHORT).show();

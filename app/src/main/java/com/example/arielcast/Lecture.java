@@ -1,9 +1,9 @@
 package com.example.arielcast;
 
-public class Member {
+public class Lecture {
     private String name, video_url, search;
 
-    public Member() {}
+    public Lecture() {}
 
     public String getName() {
         return name;
