@@ -27,8 +27,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
@@ -63,8 +67,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint({"SetTextI18n", "NonConstantResourceId"})
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.register1) { startActivity(new Intent(this, RegisterUser.class)); }
-        if (v.getId() == R.id.signIn) { userLogin(); }
+        if (v.getId() == R.id.register1) {
+            startActivity(new Intent(this, RegisterUser.class));
+        }
+        if (v.getId() == R.id.signIn) {
+            userLogin();
+        }
     }
 
     private void userLogin() {
@@ -96,17 +104,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-
         // progressBar.setVisibility(View.VISIBLE);
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    if(checkBoxL.isChecked()) {
-                        startActivity(new Intent(MainActivity.this, LecturerActivity.class));
-                    } else {
-                        startActivity(new Intent(MainActivity.this, StudentActivity.class));
+                    if (checkBoxL.isChecked()) {
+                        Query query = myRef.child("Lecturers").orderByChild("email").equalTo(email);
+
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    startActivity(new Intent(MainActivity.this, LecturerActivity.class));
+                                }
+                                else {
+                                    editTextEmail.setError("Please check your email if you are lecturer");
+                                    editTextEmail.requestFocus();
+                                    return;
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                throw error.toException(); // don't ignore errors
+                            }
+                        });                    } else {
+                        Query query = myRef.child("Students").orderByChild("email").equalTo(email);
+
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    startActivity(new Intent(MainActivity.this, StudentActivity.class));
+                                }
+                                else {
+                                    editTextEmail.setError("Please check your email if you are student");
+                                    editTextEmail.requestFocus();
+                                    return;
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                throw error.toException(); // don't ignore errors
+                            }
+                        });
+
                     }
                 } else {
                     Toast.makeText(MainActivity.this,
@@ -114,7 +159,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.LENGTH_LONG).show();
                 }
             }
+
         });
+
+
 
 
 /*  // add this on RegisterUser -send email for verify user's account
@@ -141,5 +189,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 */
     }
-
 }
+
