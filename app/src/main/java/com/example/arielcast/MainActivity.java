@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
-    private CheckBox checkBoxL;
 
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
     //DatabaseReference mConditionRef=myRef.child("users");
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void userLogin() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-        checkBoxL = findViewById(R.id.checkLecturer);
 
         if (email.isEmpty()) {
             editTextEmail.setError("email is required!");
@@ -110,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    if (checkBoxL.isChecked()) {
                         Query query = myRef.child("Lecturers").orderByChild("email").equalTo(email);
 
                         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -120,39 +117,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     startActivity(new Intent(MainActivity.this, LecturerActivity.class));
                                 }
                                 else {
-                                    editTextEmail.setError("Please check your email if you are lecturer");
-                                    editTextEmail.requestFocus();
-                                    return;
+                                    Query query = myRef.child("Students").orderByChild("email").equalTo(email);
+                                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.exists()) {
+                                                startActivity(new Intent(MainActivity.this, StudentActivity.class));
+                                            }
+                                            else {
+                                                editTextEmail.setError("Please provide valid email");
+                                                editTextEmail.requestFocus();
+                                                return;
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            throw error.toException(); // don't ignore errors
+                                        }
+                                    });
+
                                 }
                             }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                throw error.toException(); // don't ignore errors
-                            }
-                        });                    } else {
-                        Query query = myRef.child("Students").orderByChild("email").equalTo(email);
-
-                        query.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot snapshot) {
-                                if (snapshot.exists()) {
-                                    startActivity(new Intent(MainActivity.this, StudentActivity.class));
-                                }
-                                else {
-                                    editTextEmail.setError("Please check your email if you are student");
-                                    editTextEmail.requestFocus();
-                                    return;
-                                }
-                            }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
                                 throw error.toException(); // don't ignore errors
                             }
                         });
 
-                    }
                 } else {
                     Toast.makeText(MainActivity.this,
                             "Fail to login, please check your credentials",
