@@ -27,6 +27,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Objects;
+
 public class AddLectureActivity extends AppCompatActivity{
     private static final int PICK_VIDEO = 1;
     VideoView videoView;
@@ -46,8 +48,8 @@ public class AddLectureActivity extends AppCompatActivity{
         setContentView(R.layout.add_lecture);
 
         lecture = new Lecture();
-        storageReference = FirebaseStorage.getInstance().getReference("Lectures");
-        databaseReference = FirebaseDatabase.getInstance().getReference("Lectures");
+        storageReference = FirebaseStorage.getInstance().getReference("Video");
+        databaseReference = FirebaseDatabase.getInstance().getReference("video");
 
         videoView = findViewById(R.id.videoview_main);
         addLec = findViewById(R.id.addLectureButton);
@@ -61,9 +63,12 @@ public class AddLectureActivity extends AppCompatActivity{
             @Override
             public void onClick(View v)
             {
-            //    UploadVideo();
+                    UploadVideo();
+
             }
         });
+
+
     }
 
     @Override
@@ -71,7 +76,8 @@ public class AddLectureActivity extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_VIDEO || requestCode == RESULT_OK ||
-                data != null || data.getData() != null){
+                data != null || data.getData() != null)
+        {
             videoUri = data.getData();
             videoView.setVideoURI(videoUri);
         }
@@ -79,7 +85,7 @@ public class AddLectureActivity extends AppCompatActivity{
 
     public void ChooseVideo(View view) {
         Intent intent = new Intent();
-        intent.setType("Lectures/*");
+        intent.setType("video/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,PICK_VIDEO);
     }
@@ -97,17 +103,20 @@ public class AddLectureActivity extends AppCompatActivity{
     private void UploadVideo(){
         String videoName = editText.getText().toString();
         String search = editText.getText().toString().toLowerCase();
-        if (videoUri != null || !TextUtils.isEmpty(videoName)){
+        if (videoUri != null || !TextUtils.isEmpty(videoName))
+        {
             progressBar.setVisibility(View.VISIBLE);
             final StorageReference reference = storageReference.
                     child(System.currentTimeMillis() + "." + getExt(videoUri));
             uploadTask = reference.putFile(videoUri);
 
+
+
             Task<Uri> urltask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                     if (!task.isSuccessful()){
-                        throw task.getException();
+                        throw Objects.requireNonNull(task.getException());
                     }
                     return reference.getDownloadUrl();
                 }
