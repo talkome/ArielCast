@@ -136,10 +136,10 @@
 
     <EditText
         android:id="@+id/faculty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="248dp"
+        android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="15dp"
         android:ems="10"
         android:hint="faculty"
         android:inputType="textPersonName"

@@ -24,6 +24,7 @@ import com.example.arielcast.firebase.model.dataObject.LecturerObj;
 import com.example.arielcast.firebase.model.dataObject.StudentObj;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,14 +37,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText editTextEmail, editTextPassword;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
+{
 
+    private EditText editTextEmail, editTextPassword;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
 
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-    //DatabaseReference mConditionRef=myRef.child("users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +57,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button signIn = findViewById(R.id.signIn);
         signIn.setOnClickListener(this);
 
+        TextView reset = findViewById(R.id.setNewPassword);
+        reset.setOnClickListener(this);
+
+
         editTextEmail = findViewById(R.id.emailAddress);
         editTextPassword = findViewById(R.id.password1);
         progressBar = findViewById(R.id.progressBar);
 
         mAuth = FirebaseAuth.getInstance();
     }
+
 
     @SuppressLint({"SetTextI18n", "NonConstantResourceId"})
     @Override
@@ -71,6 +77,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v.getId() == R.id.signIn) {
             userLogin();
+        }
+        if(v.getId()==R.id.setNewPassword)
+        {
+            String email = editTextEmail.getText().toString().trim();
+            if(email.isEmpty()) {
+                editTextEmail.setError("email is required!");
+                editTextEmail.requestFocus();
+                return;
+            }
+            else
+            {
+                resetpassword();
+            }
         }
     }
 
@@ -154,9 +173,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         });
 
-
-
-
 /*  // add this on RegisterUser -send email for verify user's account
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -181,5 +197,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 */
     }
+
+    // reset password  if user forget password
+    private void resetpassword() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String emailaddress = editTextEmail.getText().toString();
+        auth.sendPasswordResetEmail(emailaddress)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                           Toast toast= Toast.makeText(getApplicationContext(), "Email sent. Check Your Email", Toast.LENGTH_SHORT);
+                            ViewGroup group = (ViewGroup) toast.getView();
+                            TextView messageTextView = (TextView) group.getChildAt(0);
+                            messageTextView.setTextSize(24);
+                            toast.show();
+                        } else {
+                        //    Toast.makeText(ForgotPasswordActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            if(editTextEmail==null) {
+                                Toast toast = Toast.makeText(getApplicationContext(), "Enter your email", Toast.LENGTH_SHORT);
+                                ViewGroup group = (ViewGroup) toast.getView();
+                                TextView messageTextView = (TextView) group.getChildAt(0);
+                                messageTextView.setTextSize(24);
+                                toast.show();
+                                return;
+                            }
+                            else {
+                                Toast toast = Toast.makeText(getApplicationContext(), "Email not sent. Check Your Email", Toast.LENGTH_SHORT);
+                                ViewGroup group = (ViewGroup) toast.getView();
+                                TextView messageTextView = (TextView) group.getChildAt(0);
+                                messageTextView.setTextSize(24);
+                                toast.show();
+                                return;
+                            }
+                        }
+                    }
+                });
+    }
+
+
 }
 
