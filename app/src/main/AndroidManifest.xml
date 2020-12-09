@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ArielCast">
-        <activity android:name=".LecturerActivity" />
+        <activity
+            android:name=".LecturerActivity"
+            android:label="@string/title_activity_lecturer"
+            android:theme="@style/Theme.ArielCast.NoActionBar"></activity>
+        <activity android:name=".AddLectureActivity" />
         <activity android:name=".StudentActivity" />
         <activity android:name=".RegisterUser" />
         <activity android:name=".MainActivity">

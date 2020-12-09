@@ -1,74 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:orientation="vertical"
     tools:context=".LecturerActivity">
 
-    <VideoView
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:id="@+id/videoview_main"
-        android:backgroundTint="@android:color/black"
-        />
-
-    <EditText
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Video name"
-        android:textSize="20dp"
-        android:id="@+id/et_video_name"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/design_default_color_background"
-        android:textColor="@android:color/black"
-        android:autoText="true"
-        />
+        android:theme="@style/Theme.ArielCast.AppBarOverlay">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choose video"
-        android:clickable="true"
-        android:onClick="ChooseVideo"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.ArielCast.PopupOverlay" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show video"
-        android:clickable="true"
-        android:onClick="ShowVideo"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_lecturer" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addLectureButton"
-        android:layout_margin="20dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="upload"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabSize="normal"
+        android:onClick="onClick"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:indeterminate="true"
-        android:indeterminateTint="@android:color/holo_purple"
-        android:visibility="invisible"
-        android:id="@+id/progressBar"
-        />
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
