@@ -106,43 +106,47 @@ public class AddLectureActivity extends AppCompatActivity{
     private void UploadVideo(){
         String videoName = editText.getText().toString();
         String search = editText.getText().toString().toLowerCase();
-        if (videoUri != null || !TextUtils.isEmpty(videoName))
+        if (videoUri != null )
         {
-            progressBar.setVisibility(View.VISIBLE);
-            final StorageReference ref = storageReference.child(currentTimeMillis() + "." + getExt(videoUri));
-            uploadTask = ref.putFile(videoUri);
-            addLec.setText(currentTimeMillis() + "." + getExt(videoUri));
-            Toast.makeText(AddLectureActivity.this,"Data "+uploadTask,
-                    Toast.LENGTH_SHORT).show();
+            if(!TextUtils.isEmpty(videoName)) {
+                progressBar.setVisibility(View.VISIBLE);
+                final StorageReference ref = storageReference.child(currentTimeMillis() + "." + getExt(videoUri));
+                uploadTask = ref.putFile(videoUri);
 
-            Task<Uri> urltask=uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()){
-                        throw Objects.requireNonNull(task.getException());
+                Task<Uri> urltask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw Objects.requireNonNull(task.getException());
+                        }
+                        return storageReference.child(currentTimeMillis() + "." + getExt(videoUri)).getDownloadUrl();
                     }
-                    return ref.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()){
-                        Uri downloadUri = task.getResult();
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(AddLectureActivity.this,"Data saved",
-                                Toast.LENGTH_SHORT).show();
-                        lecture.setName(videoName);
-                        lecture.setVideo_url(downloadUri.toString());
-                        lecture.setSearch(search);
-                        String i = databaseReference.push().getKey();
-                        databaseReference.child(i).setValue(lecture);
-                    } else {
-                        Toast.makeText(AddLectureActivity.this,"Failed",
-                                Toast.LENGTH_SHORT).show();
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            progressBar.setVisibility(View.INVISIBLE);
+                            Toast.makeText(AddLectureActivity.this, "Data saved",
+                                    Toast.LENGTH_SHORT).show();
+                            lecture.setName(videoName);
+                            lecture.setVideo_url(downloadUri.toString());
+                            lecture.setSearch(search);
+                            String i = databaseReference.push().getKey();
+                            databaseReference.child(i).setValue(lecture);
+                        } else {
+                            Toast.makeText(AddLectureActivity.this, "Failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-            });
-
+                });
+            }
+            else if (TextUtils.isEmpty(videoName))
+            {
+                editText.setError("please enter video name");
+                editText.requestFocus();
+                return;
+            }
         } else {
             Toast.makeText(this,"All Fields are required",Toast.LENGTH_SHORT).show();
         }
