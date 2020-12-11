@@ -131,12 +131,13 @@ public class AddLectureActivity extends AppCompatActivity{
                             Uri downloadUri = task.getResult();
 
                             progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(AddLectureActivity.this, "Data saved",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddLectureActivity.this, "Data saved!",
+                                    Toast.LENGTH_LONG).show();
                             lecture.setName(videoName);
                             lecture.setVideo_url(downloadUri.toString());
                             lecture.setSearch(search);
                             databaseReference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(lecture);
+                            startActivity(new Intent(AddLectureActivity.this,LecturerActivity.class));
                         } else {
                             Toast.makeText(AddLectureActivity.this, "Failed",
                                     Toast.LENGTH_SHORT).show();
