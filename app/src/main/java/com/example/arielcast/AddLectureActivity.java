@@ -21,6 +21,7 @@ import android.widget.VideoView;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,12 +38,13 @@ public class AddLectureActivity extends AppCompatActivity{
     Button addLec;
     ProgressBar progressBar;
     EditText editText;
-    private Uri videoUri;
+    Uri videoUri;
     MediaController mediaController;
     Lecture lecture;
     StorageReference storageReference;
     DatabaseReference databaseReference;
     UploadTask uploadTask;
+
 
 
     @Override
@@ -51,8 +53,8 @@ public class AddLectureActivity extends AppCompatActivity{
         setContentView(R.layout.add_lecture);
 
         lecture = new Lecture();
-        storageReference = FirebaseStorage.getInstance().getReference("Video");
-        databaseReference = FirebaseDatabase.getInstance().getReference("video");
+        storageReference = FirebaseStorage.getInstance().getReference().child("Video");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("video");
 
         videoView = findViewById(R.id.videoview_main);
         addLec = findViewById(R.id.addLectureButton);
@@ -110,36 +112,57 @@ public class AddLectureActivity extends AppCompatActivity{
         {
             if(!TextUtils.isEmpty(videoName)) {
                 progressBar.setVisibility(View.VISIBLE);
-                final StorageReference ref = storageReference.child(currentTimeMillis() + "." + getExt(videoUri));
-                uploadTask = ref.putFile(videoUri);
+              final StorageReference myRef = storageReference.child(currentTimeMillis() + "." + getExt(videoUri));
+                uploadTask = myRef.putFile(videoUri);
 
-                Task<Uri> urltask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                Task<Uri> taskurl=uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw Objects.requireNonNull(task.getException());
+                        if(!task.isSuccessful())
+                        {
+                            throw task.getException();
                         }
-                        return storageReference.child(currentTimeMillis() + "." + getExt(videoUri)).getDownloadUrl();
+                        return myRef.getDownloadUrl();
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
                             Uri downloadUri = task.getResult();
+
                             progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(AddLectureActivity.this, "Data saved",
                                     Toast.LENGTH_SHORT).show();
                             lecture.setName(videoName);
                             lecture.setVideo_url(downloadUri.toString());
                             lecture.setSearch(search);
-                            String i = databaseReference.push().getKey();
-                            databaseReference.child(i).setValue(lecture);
+                            databaseReference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(lecture);
                         } else {
                             Toast.makeText(AddLectureActivity.this, "Failed",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+                      /*  uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+
+                            progressBar.setVisibility(View.INVISIBLE);
+                            Toast.makeText(AddLectureActivity.this, "Data saved",
+                                    Toast.LENGTH_SHORT).show();
+                            lecture.setName(videoName);
+                            lecture.setVideo_url(downloadUri.toString());
+                            lecture.setSearch(search);
+                            databaseReference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(lecture);
+                        } else {
+                            Toast.makeText(AddLectureActivity.this, "Failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });*/
+                    }
             }
             else if (TextUtils.isEmpty(videoName))
             {
@@ -147,7 +170,7 @@ public class AddLectureActivity extends AppCompatActivity{
                 editText.requestFocus();
                 return;
             }
-        } else {
+         else {
             Toast.makeText(this,"All Fields are required",Toast.LENGTH_SHORT).show();
         }
     }
