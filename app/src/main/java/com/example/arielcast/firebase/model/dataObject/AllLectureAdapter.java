@@ -24,6 +24,6 @@ public class AllLectureAdapter extends ArrayAdapter<LectureObj> {
         View view = layoutInflater.inflate(R.layout.custom_post, parent, false);
         TextView tvTitle = (TextView)view.findViewById(R.id.tvTitle);
         LectureObj temp = objects.get(position);
-        tvTitle.setText(temp.title);
+        tvTitle.setText(temp.getName());
         return view;
     }}
