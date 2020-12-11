@@ -5,7 +5,7 @@ public class LecturerObj {
      String password;
      String fullname;
      String phone;
-     String faculty;
+     String courseName;
 
 
     public LecturerObj(String email,String password,String fullname,String phone,String faculty)
@@ -14,7 +14,7 @@ public class LecturerObj {
         this.password=password;
         this.fullname=fullname;
         this.phone=phone;
-        this.faculty=faculty;
+        this.courseName=faculty;
     }
 
     public LecturerObj() {

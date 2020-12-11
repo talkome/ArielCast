@@ -112,14 +112,13 @@ public class AddLectureActivity extends AppCompatActivity{
         {
             if(!TextUtils.isEmpty(videoName)) {
                 progressBar.setVisibility(View.VISIBLE);
-              final StorageReference myRef = storageReference.child(currentTimeMillis() + "." + getExt(videoUri));
+                final StorageReference myRef = storageReference.child(currentTimeMillis() + "." + getExt(videoUri));
                 uploadTask = myRef.putFile(videoUri);
 
-                Task<Uri> taskurl=uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                Task<Uri> taskurl = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if(!task.isSuccessful())
-                        {
+                        if (!task.isSuccessful()) {
                             throw task.getException();
                         }
                         return myRef.getDownloadUrl();
@@ -136,34 +135,15 @@ public class AddLectureActivity extends AppCompatActivity{
                             lecture.setName(videoName);
                             lecture.setVideo_url(downloadUri.toString());
                             lecture.setSearch(search);
-                            databaseReference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(lecture);
-                            startActivity(new Intent(AddLectureActivity.this,LecturerActivity.class));
+                            databaseReference.child(videoName).setValue(lecture);
+                            startActivity(new Intent(AddLectureActivity.this, LecturerActivity.class));
                         } else {
                             Toast.makeText(AddLectureActivity.this, "Failed",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-                      /*  uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            Uri downloadUri = task.getResult();
-
-                            progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(AddLectureActivity.this, "Data saved",
-                                    Toast.LENGTH_SHORT).show();
-                            lecture.setName(videoName);
-                            lecture.setVideo_url(downloadUri.toString());
-                            lecture.setSearch(search);
-                            databaseReference.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(lecture);
-                        } else {
-                            Toast.makeText(AddLectureActivity.this, "Failed",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });*/
-                    }
+            }
             }
             else if (TextUtils.isEmpty(videoName))
             {
