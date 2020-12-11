@@ -269,9 +269,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
  public void rbClick(View v) {
      cb=findViewById(R.id.cbLecturer);
      if(cb.isChecked()) {
-         editTextFaculty.setVisibility(View.VISIBLE);
+         editTextCourse.setVisibility(View.VISIBLE);
      } else {
-         editTextFaculty.setVisibility(View.GONE);
+         editTextCourse.setVisibility(View.GONE);
      }
  }
 }

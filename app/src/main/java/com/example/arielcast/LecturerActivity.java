@@ -26,6 +26,8 @@ public class LecturerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(view.getId()==R.id.fab)
                 {
+                    Intent intent=getIntent();
+                    String email=intent.getExtras().getString("Email");
                     startActivity(new Intent(LecturerActivity.this, AddLectureActivity.class));
                 }
             }

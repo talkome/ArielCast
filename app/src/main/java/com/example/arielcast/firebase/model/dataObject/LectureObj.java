@@ -1,9 +1,17 @@
-package com.example.arielcast;
+package com.example.arielcast.firebase.model.dataObject;
 
-public class Lecture {
-    private String name, video_url, search;
+public class LectureObj {
+    private String name,lecturerEmail, video_url, search;
 
-    public Lecture() {}
+    public LectureObj() {}
+
+    public String getLecturerEmail() {
+        return lecturerEmail;
+    }
+
+    public void setLecturerEmail(String lecturerEmail) {
+        this.lecturerEmail = lecturerEmail;
+    }
 
     public String getName() {
         return name;

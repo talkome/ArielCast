@@ -122,7 +122,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onDataChange(DataSnapshot snapshot) {
                                 if (snapshot.exists()) {
-                                    startActivity(new Intent(MainActivity.this, LecturerActivity.class));
+                                    Intent intent=new Intent(MainActivity.this, LecturerActivity.class);
+                                    intent.putExtra("Email",email);
+                                    startActivity(intent);
                                 }
                                 else {
                                     Query query = myRef.child("Students").orderByChild("email").equalTo(email);

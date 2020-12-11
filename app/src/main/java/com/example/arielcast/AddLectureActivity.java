@@ -18,17 +18,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.example.arielcast.firebase.model.dataObject.LectureObj;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.util.Objects;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -40,7 +38,7 @@ public class AddLectureActivity extends AppCompatActivity{
     EditText editText;
     Uri videoUri;
     MediaController mediaController;
-    Lecture lecture;
+    LectureObj lecture;
     StorageReference storageReference;
     DatabaseReference databaseReference;
     UploadTask uploadTask;
@@ -52,7 +50,7 @@ public class AddLectureActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_lecture);
 
-        lecture = new Lecture();
+        lecture = new LectureObj();
         storageReference = FirebaseStorage.getInstance().getReference().child("Video");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("video");
 
@@ -132,9 +130,14 @@ public class AddLectureActivity extends AppCompatActivity{
                             progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(AddLectureActivity.this, "Data saved!",
                                     Toast.LENGTH_LONG).show();
+
+                            // get Email ( from Extras) from LecturerActivity
+                            Intent intent=getIntent();
+                            String lecturerEmail=intent.getExtras().getString("Email");
                             lecture.setName(videoName);
                             lecture.setVideo_url(downloadUri.toString());
                             lecture.setSearch(search);
+                            lecture.setLecturerEmail(lecturerEmail);
                             databaseReference.child(videoName).setValue(lecture);
                             startActivity(new Intent(AddLectureActivity.this, LecturerActivity.class));
                         } else {
