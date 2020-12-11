@@ -28,7 +28,9 @@ public class LecturerActivity extends AppCompatActivity {
                 {
                     Intent intent=getIntent();
                     String email=intent.getExtras().getString("Email");
-                    startActivity(new Intent(LecturerActivity.this, AddLectureActivity.class));
+                    Intent i=new  Intent(LecturerActivity.this, AddLectureActivity.class);
+                    i.putExtra("Email",email);
+                    startActivity(i);
                 }
             }
         });
