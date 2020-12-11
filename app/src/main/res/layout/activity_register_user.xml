@@ -135,13 +135,13 @@
         />
 
     <EditText
-        android:id="@+id/faculty"
+        android:id="@+id/coursename"
         android:layout_width="248dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="15dp"
         android:ems="10"
-        android:hint="faculty"
+        android:hint="Course Name"
         android:inputType="textPersonName"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"

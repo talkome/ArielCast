@@ -8,13 +8,13 @@ public class LecturerObj {
      String courseName;
 
 
-    public LecturerObj(String email,String password,String fullname,String phone,String faculty)
+    public LecturerObj(String email,String password,String fullname,String phone,String courseName)
     {
         this.email=email;
         this.password=password;
         this.fullname=fullname;
         this.phone=phone;
-        this.courseName=faculty;
+        this.courseName=courseName;
     }
 
     public LecturerObj() {
@@ -53,12 +53,12 @@ public class LecturerObj {
         return phone;
     }
 
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public String getFaculty() {
-        return faculty;
+    public String getCourseName() {
+        return courseName;
     }
 
 }

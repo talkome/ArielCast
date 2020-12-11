@@ -30,7 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Objects;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
-    private EditText editTextFullName, editTextEmail, editTextPassword, editTextPhone,editTextFaculty;
+    private EditText editTextFullName, editTextEmail, editTextPassword, editTextPhone,editTextCourse;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
     private CheckBox cb;
@@ -52,7 +52,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editTextEmail = findViewById(R.id.emailAdress);
         editTextPassword = findViewById(R.id.password);
         editTextPhone = findViewById(R.id.phone);
-        editTextFaculty = findViewById(R.id.faculty);
+        editTextCourse = findViewById(R.id.coursename);
         progressBar = findViewById(R.id.progressBar);
     }
 
@@ -110,13 +110,13 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
         if (!phone.startsWith("05")){
             editTextPhone.setError("Please provide valid phone");
-            editTextFaculty.requestFocus();
+            editTextPhone.requestFocus();
             return;
         }
 
         if (phone.length() != 10){
             editTextPhone.setError("Please provide valid phone");
-            editTextFaculty.requestFocus();
+            editTextPhone.requestFocus();
             return;
         }
 
@@ -171,7 +171,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         String password = editTextPassword.getText().toString().trim();
         String fullName = editTextFullName.getText().toString().trim();
         String phone = editTextPhone.getText().toString().trim();
-        String Faculty=editTextFaculty.getText().toString().trim();
+        String course=editTextCourse.getText().toString().trim();
 
         if (fullName.isEmpty()){
             editTextFullName.setError("Full name is required!");
@@ -202,21 +202,21 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             editTextEmail.requestFocus();
             return;
         }
-        if (Faculty.isEmpty()){
-            editTextFaculty.setError("Faculty is required!");
-            editTextFaculty.requestFocus();
+        if (course.isEmpty()){
+            editTextCourse.setError("Faculty is required!");
+            editTextCourse.requestFocus();
             return;
         }
 
         if (!phone.startsWith("05")){
             editTextPhone.setError("Please provide valid phone");
-            editTextFaculty.requestFocus();
+            editTextPhone.requestFocus();
             return;
         }
 
         if (phone.length() != 10){
             editTextPhone.setError("Please provide valid phone");
-            editTextFaculty.requestFocus();
+            editTextPhone.requestFocus();
             return;
         }
 
@@ -229,7 +229,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             // ADD STUDENT TO DATABASE
                            // FirebaseDBLecturers st=new FirebaseDBLecturers();
-                            LecturerObj user=new LecturerObj(email,password,fullName,phone,Faculty);
+                            LecturerObj user=new LecturerObj(email,password,fullName,phone,course);
                             // st.addStudentToDB(user);
 
                             FirebaseDatabase.getInstance().getReference("Lecturers")
