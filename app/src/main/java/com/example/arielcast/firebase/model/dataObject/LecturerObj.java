@@ -1,5 +1,7 @@
 package com.example.arielcast.firebase.model.dataObject;
 
+import android.content.Context;
+
 public class LecturerObj {
      String email;
      String password;

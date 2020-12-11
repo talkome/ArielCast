@@ -20,7 +20,9 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_lecturer" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_lecturer" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -30,11 +32,13 @@
         android:layout_margin="@dimen/fab_margin"
         app:fabSize="normal"
         app:srcCompat="@android:drawable/ic_input_add"
-        android:contentDescription="TODO" />
+        tools:ignore="ContentDescription"
+         />
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="804dp"
+        app:layout_anchorGravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
