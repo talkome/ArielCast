@@ -21,15 +21,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.ListView;
 
 public class LecturerActivity extends AppCompatActivity {
 
 DatabaseReference myRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecturer);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        ListView lv=findViewById(R.id.listView);
         setSupportActionBar(toolbar);
 
         // get lecturer's email from MainActivity
@@ -46,8 +49,8 @@ DatabaseReference myRef;
                     LectureObj p = data.getValue(LectureObj.class);
                   //  lectures.add(p);
                 }
-               // allPostAdapter = new AllPostAdapter(AllPostActivity.this,0,0,posts);
-            //    lv.setAdapter(allPostAdapter);
+                allPostAdapter = new AllPostAdapter(AllPostActivity.this,0,0,posts);
+               lv.setAdapter(allPostAdapter);
             }
 
             @Override

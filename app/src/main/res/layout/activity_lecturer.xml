@@ -32,4 +32,9 @@
         app:srcCompat="@android:drawable/ic_input_add"
         android:contentDescription="TODO" />
 
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
