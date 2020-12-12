@@ -233,7 +233,8 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                             // st.addStudentToDB(user);
 
                             FirebaseDatabase.getInstance().getReference("Lecturers")
-                                    .child(email).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
 
