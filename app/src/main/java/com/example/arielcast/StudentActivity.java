@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class StudentActivity extends AppCompatActivity {
     ListView studentListView;
     ArrayList<String> coursesList = new ArrayList<>();
+    DatabaseReference mRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +32,12 @@ public class StudentActivity extends AppCompatActivity {
         studentListView = findViewById(R.id.student_listview);
         studentListView.setAdapter(myArrayAdapter);
 
-        final DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("Lecturers");
+        mRef = FirebaseDatabase.getInstance().getReference().child("Lecturers");
 
         mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                DatabaseReference mRef1 = mRef.child("courseName");
-                String value = snapshot.getValue(String.class);
-                Toast.makeText(StudentActivity.this, value, Toast.LENGTH_LONG).show();
+                String value = snapshot.child("courseName").getValue(String.class);
                 coursesList.add(value);
                 myArrayAdapter.notifyDataSetChanged();
             }
