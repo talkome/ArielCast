@@ -94,9 +94,9 @@ public class AddLectureActivity extends AppCompatActivity{
     }
 
     private String getExt(Uri uri){
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+        ContentResolver contentResolver = getContentResolver(); //
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton(); //
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)); //
     }
 
 

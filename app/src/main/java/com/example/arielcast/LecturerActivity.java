@@ -36,21 +36,20 @@ DatabaseReference myRef;
         setSupportActionBar(toolbar);
 
         // get lecturer's email from MainActivity
-        Intent intent=getIntent();
-        String email=intent.getExtras().getString("Email");
+        Intent intent = getIntent();
+        String email = intent.getExtras().getString("Email");
 
         //
-        myRef= FirebaseDatabase.getInstance().getReference().child("video");
+        myRef = FirebaseDatabase.getInstance().getReference().child("video");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot data : snapshot.getChildren())
-                {
+                for(DataSnapshot data : snapshot.getChildren()) {
                     LectureObj p = data.getValue(LectureObj.class);
-                  //  lectures.add(p);
+//                    lectures.add(p);
                 }
-                allPostAdapter = new AllPostAdapter(AllPostActivity.this,0,0,posts);
-               lv.setAdapter(allPostAdapter);
+//                allPostAdapter = new AllPostAdapter(AllPostActivity.this,0,0,posts);
+//               lv.setAdapter(allPostAdapter);
             }
 
             @Override
@@ -64,10 +63,10 @@ DatabaseReference myRef;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(view.getId()==R.id.fab)
+                if(view.getId() == R.id.fab)
                 {
                     // save lecturer's email and start AddLectureActivity
-                    Intent i=new  Intent(LecturerActivity.this, AddLectureActivity.class);
+                    Intent i = new  Intent(LecturerActivity.this, AddLectureActivity.class);
                     i.putExtra("Email",email);
                     startActivity(i);
                 }
