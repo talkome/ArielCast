@@ -47,7 +47,8 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 String value = snapshot.child("courseName").getValue(String.class);
-                coursesList.add(value);
+                String value2 = snapshot.child("fullname").getValue(String.class);
+                coursesList.add(value+" - "+value2);
                 myArrayAdapter.notifyDataSetChanged();
             }
 
