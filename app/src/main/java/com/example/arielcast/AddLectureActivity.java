@@ -42,7 +42,7 @@ public class AddLectureActivity extends AppCompatActivity{
     StorageReference storageReference;
     DatabaseReference databaseReference;
     UploadTask uploadTask;
-
+    String lecturerEmail;
 
 
     @Override
@@ -53,6 +53,9 @@ public class AddLectureActivity extends AppCompatActivity{
         lecture = new LectureObj();
         storageReference = FirebaseStorage.getInstance().getReference().child("Video");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("video");
+
+        Intent intent=getIntent();
+        lecturerEmail=intent.getExtras().getString("Email");
 
         videoView = findViewById(R.id.videoview_main);
         addLec = findViewById(R.id.addLectureButton);
@@ -132,14 +135,15 @@ public class AddLectureActivity extends AppCompatActivity{
                                     Toast.LENGTH_LONG).show();
 
                             // get Email ( from Extras) from LecturerActivity
-                            Intent intent=getIntent();
-                            String lecturerEmail=intent.getExtras().getString("Email");
+
                             lecture.setName(videoName);
                             lecture.setVideo_url(downloadUri.toString());
                             lecture.setSearch(search);
                             lecture.setLecturerEmail(lecturerEmail);
                             databaseReference.child(videoName).setValue(lecture);
-                            startActivity(new Intent(AddLectureActivity.this, LecturerActivity.class));
+                            Intent i=new Intent(AddLectureActivity.this, LecturerActivity.class);
+                            i.putExtra("Email",lecturerEmail);
+                            startActivity(i);
                         } else {
                             Toast.makeText(AddLectureActivity.this, "Failed",
                                     Toast.LENGTH_SHORT).show();

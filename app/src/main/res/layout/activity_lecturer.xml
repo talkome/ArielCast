@@ -41,7 +41,8 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="771dp"
-        android:textSize="16dp"
+        android:textAlignment="center"
+        android:textSize="24dp"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="center" />
 

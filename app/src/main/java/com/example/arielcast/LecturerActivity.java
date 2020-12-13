@@ -48,10 +48,10 @@ public class LecturerActivity extends AppCompatActivity {
 
         lecturesListView = findViewById(R.id.listView);
         lecturesListView.setAdapter(myArrayAdapter);
+        lecturesList.add("");
+        myArrayAdapter.notifyDataSetChanged();
 
         myRef = FirebaseDatabase.getInstance().getReference().child("video");
-
-
 
                     Query myOrderPostsQuery = myRef.orderByChild("lecturerEmail").equalTo(email);
 

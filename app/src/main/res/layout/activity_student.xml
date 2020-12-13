@@ -24,10 +24,9 @@
 <!--    <include layout="@layout/content_lecturer" />-->
 
     <ListView
+        android:id="@+id/student_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/student_listview"
-        android:textSize="16dp"
-        />
+        android:textSize="24dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
