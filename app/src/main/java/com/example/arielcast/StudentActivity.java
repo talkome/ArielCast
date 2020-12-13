@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -31,6 +33,13 @@ public class StudentActivity extends AppCompatActivity {
 
         studentListView = findViewById(R.id.student_listview);
         studentListView.setAdapter(myArrayAdapter);
+
+        // get student's email from MainActivity
+        Intent intent = getIntent();
+        String email= intent.getExtras().getString("Email");
+        Toast.makeText(StudentActivity.this,
+                "Welcome "+email+" !",
+                Toast.LENGTH_LONG).show();
 
         mRef = FirebaseDatabase.getInstance().getReference().child("Lecturers");
 

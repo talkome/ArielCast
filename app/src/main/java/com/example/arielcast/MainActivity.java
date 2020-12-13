@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.arielcast.firebase.model.dataObject.StudentObj;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -132,7 +133,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             if (snapshot.exists()) {
-                                                startActivity(new Intent(MainActivity.this, StudentActivity.class));
+                                                Intent intent=new Intent(MainActivity.this, StudentActivity.class);
+                                                intent.putExtra("Email",email);
+                                                startActivity(intent);
                                             }
                                             else {
                                                 editTextEmail.setError("Please provide valid email");

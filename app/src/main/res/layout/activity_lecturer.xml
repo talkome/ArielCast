@@ -7,14 +7,15 @@
     tools:context=".LecturerActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
         android:theme="@style/Theme.ArielCast.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="1dp"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/Theme.ArielCast.PopupOverlay" />
 
