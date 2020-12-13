@@ -39,7 +39,9 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="804dp"
-        app:layout_anchorGravity="center" />
+        app:layout_anchorGravity="center"
+        android:textSize="6dp"
+        />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

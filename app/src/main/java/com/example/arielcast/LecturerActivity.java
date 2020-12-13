@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -58,6 +59,7 @@ public class LecturerActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot data : snapshot.getChildren()) {
+                                View v=new Button(getApplicationContext());
                                 String value = data.getValue(LectureObj.class).getName();
                                 lecturesList.add(value);
                                 myArrayAdapter.notifyDataSetChanged();
