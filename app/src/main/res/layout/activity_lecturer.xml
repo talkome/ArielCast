@@ -22,7 +22,9 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/content_lecturer" />
+        layout="@layout/content_lecturer"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -38,10 +40,10 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="804dp"
-        app:layout_anchorGravity="center"
-        android:textSize="6dp"
-        />
+        android:layout_height="771dp"
+        android:textSize="16dp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

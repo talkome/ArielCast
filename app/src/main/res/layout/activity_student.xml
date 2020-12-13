@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/student_listview"
-        android:textSize="6dp"
+        android:textSize="16dp"
         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
