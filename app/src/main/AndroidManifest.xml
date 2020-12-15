@@ -16,6 +16,7 @@
         <activity android:name=".AddLectureActivity" />
         <activity android:name=".StudentActivity" />
         <activity android:name=".RegisterUser" />
+        <activity android:name=".AddCourseActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

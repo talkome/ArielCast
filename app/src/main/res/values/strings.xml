@@ -26,4 +26,9 @@
     <string name="email" />
     <string name="register" />
     <string name="title_activity_lecturer" />
+    <string name="credits">Credits</string>
+    <string name="button">Button</string>
+    <string name="year">Year</string>
+    <string name="semester">Semester</string>
+    <string name="course_name">Course Name</string>
 </resources>

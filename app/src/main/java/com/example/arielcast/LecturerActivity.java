@@ -85,8 +85,9 @@ public class LecturerActivity extends AppCompatActivity {
                 if(view.getId() == R.id.fab) {
 
                     // save lecturer's email and start AddLectureActivity
-                    Intent i = new  Intent(LecturerActivity.this, AddLectureActivity.class);
+                    Intent i = new  Intent(LecturerActivity.this,AddCourseActivity.class);
                     i.putExtra("Email",email);
+                    i.putExtra("ID",lecId);
                     startActivity(i);
                 }
             }
