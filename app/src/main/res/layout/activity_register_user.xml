@@ -19,7 +19,6 @@
         android:textAlignment="center"
         android:textSize="60sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/faculty"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +125,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="116dp"
-        android:onClick="rbClick"
         android:text="I'm Lecturer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,18 +132,4 @@
 
         />
 
-    <EditText
-        android:id="@+id/coursename"
-        android:layout_width="248dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="15dp"
-        android:ems="10"
-        android:hint="Course Name"
-        android:inputType="textPersonName"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

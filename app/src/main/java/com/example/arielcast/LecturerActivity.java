@@ -3,19 +3,18 @@ package com.example.arielcast;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.arielcast.firebase.model.dataObject.LectureObj;
+import com.example.arielcast.firebase.model.dataObject.CourseObj;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +27,8 @@ import java.util.ArrayList;
 public class LecturerActivity extends AppCompatActivity {
 
     DatabaseReference myRef;
-    ListView lecturesListView;
-    ArrayList<String> lecturesList = new ArrayList<>();
+    ListView coursesListView;
+    ArrayList<String> coursesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +41,27 @@ public class LecturerActivity extends AppCompatActivity {
         // get lecturer's email from MainActivity
         Intent intent = getIntent();
         String email = intent.getExtras().getString("Email");
+        String lecId=intent.getExtras().getString("ID");
 
-        //show my lectures
-        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<>(LecturerActivity.this, android.R.layout.simple_list_item_1, lecturesList);
+        //show my courses
+        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<>(LecturerActivity.this, android.R.layout.simple_list_item_1, coursesList);
 
-        lecturesListView = findViewById(R.id.listView);
-        lecturesListView.setAdapter(myArrayAdapter);
-        lecturesList.add("");
+        coursesListView = findViewById(R.id.listView);
+        coursesListView.setAdapter(myArrayAdapter);
+        coursesList.add("");
         myArrayAdapter.notifyDataSetChanged();
+        
 
-        myRef = FirebaseDatabase.getInstance().getReference().child("video");
+        myRef = FirebaseDatabase.getInstance().getReference().child("Courses");
 
-                    Query myOrderPostsQuery = myRef.orderByChild("lecturerEmail").equalTo(email);
+                    Query myOrderPostsQuery = myRef.orderByChild("lecturerId").equalTo(lecId);
 
                     myOrderPostsQuery.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot data : snapshot.getChildren()) {
-                                String value = data.getValue(LectureObj.class).getName();
-                                lecturesList.add(value);
+                                String value = data.getValue(CourseObj.class).getCourseName();
+                                coursesList.add(value);
                                 myArrayAdapter.notifyDataSetChanged();
                             }
 
@@ -71,6 +72,7 @@ public class LecturerActivity extends AppCompatActivity {
 
                         }
                     });
+
 
 
 

@@ -3,20 +3,22 @@ package com.example.arielcast.firebase.model.dataObject;
 import android.content.Context;
 
 public class LecturerObj {
+    String lecturerId;
      String email;
      String password;
      String fullname;
      String phone;
-     String courseName;
 
 
-    public LecturerObj(String email,String password,String fullname,String phone,String courseName)
+
+    public LecturerObj(String lecturerId,String email,String password,String fullname,String phone)
     {
+        this.lecturerId=lecturerId;
         this.email=email;
         this.password=password;
         this.fullname=fullname;
         this.phone=phone;
-        this.courseName=courseName;
+
     }
 
     public LecturerObj() {
@@ -39,8 +41,8 @@ public class LecturerObj {
         return email;
     }
 
-    public void setFullname(String fname) {
-        this.fullname = fname;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getFullname() {
@@ -55,12 +57,11 @@ public class LecturerObj {
         return phone;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setLecturerId(String lecturerId) {
+        this.lecturerId = lecturerId;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getLecturerId() {
+        return lecturerId;
     }
-
 }

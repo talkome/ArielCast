@@ -1,24 +1,26 @@
 package com.example.arielcast.firebase.model.dataObject;
 
 public class LectureObj {
-    private String name,lecturerEmail, video_url, search;
+    private String lectureName,lecturerId, video_url, search,courseId;
 
-    public LectureObj() {}
+    public LectureObj() {
 
-    public String getLecturerEmail() {
-        return lecturerEmail;
     }
 
-    public void setLecturerEmail(String lecturerEmail) {
-        this.lecturerEmail = lecturerEmail;
+    public String getLectureName() {
+        return lectureName;
     }
 
-    public String getName() {
-        return name;
+    public void setLectureName(String lectureName) {
+        this.lectureName = lectureName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getLecturerId() {
+        return lecturerId;
+    }
+
+    public void setLecturerId(String lecturerId) {
+        this.lecturerId = lecturerId;
     }
 
     public String getVideo_url() {
@@ -37,4 +39,11 @@ public class LectureObj {
         this.search = search;
     }
 
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
 }

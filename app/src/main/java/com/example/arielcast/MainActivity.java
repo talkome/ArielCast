@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.arielcast.firebase.model.dataObject.LecturerObj;
 import com.example.arielcast.firebase.model.dataObject.StudentObj;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -123,9 +124,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onDataChange(DataSnapshot snapshot) {
                                 if (snapshot.exists()) {
-                                    Intent intent=new Intent(MainActivity.this, LecturerActivity.class);
-                                    intent.putExtra("Email",email);
-                                    startActivity(intent);
+                                    for(DataSnapshot data:snapshot.getChildren()) {
+                                        Intent intent = new Intent(MainActivity.this, LecturerActivity.class);
+                                        String value = data.getValue(LecturerObj.class).getLecturerId();
+                                        intent.putExtra("Email", email);
+                                        intent.putExtra("ID",value);
+                                        startActivity(intent);
+                                    }
                                 }
                                 else {
                                     Query query = myRef.child("Students").orderByChild("email").equalTo(email);

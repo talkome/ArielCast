@@ -136,10 +136,10 @@ public class AddLectureActivity extends AppCompatActivity{
 
                             // get Email ( from Extras) from LecturerActivity
 
-                            lecture.setName(videoName);
+                            lecture.setLectureName(videoName);
                             lecture.setVideo_url(downloadUri.toString());
                             lecture.setSearch(search);
-                            lecture.setLecturerEmail(lecturerEmail);
+                        //    lecture.setLecturerEmail(lecturerEmail); // id
                             databaseReference.child(videoName).setValue(lecture);
                             Intent i=new Intent(AddLectureActivity.this, LecturerActivity.class);
                             i.putExtra("Email",lecturerEmail);
