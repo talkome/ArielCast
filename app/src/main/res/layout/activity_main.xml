@@ -62,6 +62,7 @@
         app:layout_constraintBottom_toTopOf="@+id/setNewPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#3949AB"
         tools:ignore="MissingConstraints" />
 
     <TextView
