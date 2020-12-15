@@ -196,37 +196,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void resetpassword() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String emailaddress = editTextEmail.getText().toString();
-        auth.sendPasswordResetEmail(emailaddress)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                           Toast toast= Toast.makeText(getApplicationContext(), "Email sent. Check Your Email", Toast.LENGTH_SHORT);
-                            ViewGroup group = (ViewGroup) toast.getView();
-                            TextView messageTextView = (TextView) group.getChildAt(0);
-                            messageTextView.setTextSize(24);
-                            toast.show();
-                        } else {
-                        //    Toast.makeText(ForgotPasswordActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            if(editTextEmail==null) {
-                                Toast toast = Toast.makeText(getApplicationContext(), "Enter your email", Toast.LENGTH_SHORT);
-                                ViewGroup group = (ViewGroup) toast.getView();
-                                TextView messageTextView = (TextView) group.getChildAt(0);
-                                messageTextView.setTextSize(24);
-                                toast.show();
-                                return;
-                            }
-                            else {
-                                Toast toast = Toast.makeText(getApplicationContext(), "Email not sent. Check Your Email", Toast.LENGTH_SHORT);
-                                ViewGroup group = (ViewGroup) toast.getView();
-                                TextView messageTextView = (TextView) group.getChildAt(0);
-                                messageTextView.setTextSize(24);
-                                toast.show();
-                                return;
-                            }
-                        }
+
+        if(editTextEmail==null) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Enter your email", Toast.LENGTH_SHORT);
+            ViewGroup group = (ViewGroup) toast.getView();
+            TextView messageTextView = (TextView) group.getChildAt(0);
+            messageTextView.setTextSize(24);
+            toast.show();
+            return;
+        }
+        else {
+            auth.sendPasswordResetEmail(emailaddress).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Email sent. Check Your Email", Toast.LENGTH_SHORT);
+                        ViewGroup group = (ViewGroup) toast.getView();
+                        TextView messageTextView = (TextView) group.getChildAt(0);
+                        messageTextView.setTextSize(24);
+                        toast.show();
                     }
-                });
+                    //    Toast.makeText(ForgotPasswordActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    else {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Email not sent. Check Your Email", Toast.LENGTH_SHORT);
+                        ViewGroup group = (ViewGroup) toast.getView();
+                        TextView messageTextView = (TextView) group.getChildAt(0);
+                        messageTextView.setTextSize(24);
+                        toast.show();
+                        return;
+                    }
+
+                }
+            });
+        }
     }
 
 
