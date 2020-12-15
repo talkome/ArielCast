@@ -2,26 +2,26 @@ package com.example.arielcast;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
+import android.widget.Toast;
 
 import com.example.arielcast.firebase.model.dataObject.CourseObj;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Objects;
 
 public class AddCourseActivity extends AppCompatActivity {
     EditText courseName,semester,year,credits;
@@ -29,6 +29,8 @@ public class AddCourseActivity extends AppCompatActivity {
     ImageButton imageButton;
     ImageView imagelogo;
     TextView textlogo;
+    DatabaseReference databaseReference;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class AddCourseActivity extends AppCompatActivity {
         button=findViewById(R.id.button);
         textlogo=findViewById(R.id.viewlogo);
         imagelogo=findViewById(R.id.imagelogo);
+        progressBar=findViewById(R.id.progressBar2);
 
         // get lecturer's email from MainActivity
         Intent intent = getIntent();
@@ -49,6 +52,7 @@ public class AddCourseActivity extends AppCompatActivity {
         String lecId=intent.getExtras().getString("ID");
 
         imageButton=findViewById(R.id.imageButton);
+
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +64,39 @@ public class AddCourseActivity extends AppCompatActivity {
             }
         });
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                String id= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                CourseObj course=new CourseObj(id,courseName.getText().toString().trim(), lecId, semester.getText().toString().trim(),
+                        year.getText().toString().trim(), credits.getText().toString().trim());
+                FirebaseDatabase.getInstance().getReference().child("Courses").child(id).setValue(course)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(AddCourseActivity.this,
+                                    "your new course added successfully!",
+                                    Toast.LENGTH_LONG).show();
+
+                            // back to Main Screen - lecturer activity
+                            Intent intent = new Intent(v.getContext(),LecturerActivity.class);
+                            intent.putExtra("Email",email);
+                            intent.putExtra("ID",lecId);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(AddCourseActivity.this,
+                                    "Failed to add this course! try again",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+                });
+            }
+        });
 
     }
 }

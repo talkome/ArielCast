@@ -3,69 +3,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <EditText
+        android:id="@+id/semester"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="37dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/semester"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/year"
+        app:layout_constraintEnd_toEndOf="@+id/courseName"
+        app:layout_constraintTop_toBottomOf="@+id/courseName" />
 
     <EditText
         android:id="@+id/courseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="118dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="26dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="32dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/course_name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/semester"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/semester"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="27dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/semester"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/year"
-        app:layout_constraintStart_toStartOf="@+id/courseName"
-        app:layout_constraintTop_toBottomOf="@+id/courseName" />
 
     <EditText
         android:id="@+id/year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="33dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/year"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/credits"
-        app:layout_constraintStart_toStartOf="@+id/semester"
+        app:layout_constraintEnd_toEndOf="@+id/semester"
         app:layout_constraintTop_toBottomOf="@+id/semester" />
 
     <EditText
         android:id="@+id/credits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="398dp"
+        android:layout_marginBottom="176dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/credits"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/imagelogo"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar2"
         app:layout_constraintStart_toStartOf="@+id/year"
         app:layout_constraintTop_toBottomOf="@+id/year" />
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="84dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="292dp"
         android:contentDescription="TODO"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/courseName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/homeAsUpIndicator"
@@ -73,36 +79,60 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:text="@string/button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="132dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="93dp"
+        android:background="#00897B"
+        android:backgroundTint="#FFFFFF"
+        android:text="Insert"
+        app:icon="@android:drawable/ic_input_add"
+        app:iconTint="#43A047"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.593" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:strokeColor="#7CB342" />
 
     <ImageView
         android:id="@+id/imagelogo"
-        android:layout_width="130dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="17dp"
+        android:layout_width="352dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="140dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/credits"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar2"
         app:srcCompat="@mipmap/ic_bannerlogo_foreground" />
 
     <TextView
         android:id="@+id/viewlogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="114dp"
+        android:layout_width="160dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
         android:text="ArielCast"
         android:textColor="#121B51"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imagelogo"
         app:layout_constraintTop_toTopOf="@+id/imagelogo" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="304dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/credits" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

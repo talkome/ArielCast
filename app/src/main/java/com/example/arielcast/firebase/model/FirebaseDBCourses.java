@@ -8,8 +8,8 @@ public class FirebaseDBCourses extends FirebaseBaseModel
 
     public void addCourseToDB(String courseId,String courseName,String lecturerId,String semester,int year,int credits)
     {
-        CourseObj courseReg=new CourseObj(courseId,courseName,lecturerId,semester,year,credits);
-        myRef.child("courses").child(courseId).setValue(courseReg);
+       // CourseObj courseReg=new CourseObj(courseName, lecturerId, semester, year, credits, courseId);
+      //  myRef.child("courses").child(courseId).setValue(courseReg);
     }
 
     public DatabaseReference getCourseFromDB(String courseID)
@@ -19,9 +19,9 @@ public class FirebaseDBCourses extends FirebaseBaseModel
 
     public void WriteSearchCourse(String courseId,String courseName,String lecturerId,String semester,int year,int credits)
     {
-        CourseObj course = new CourseObj(courseId, courseName, lecturerId, semester, year, credits);
-        course.setCourseId(courseId);
-        myRef.child("searchCourse").child(course.getCourseName()).child(courseId).setValue(course);
+      //  CourseObj course = new CourseObj(courseName, lecturerId, semester, year, credits, courseId);
+      //  course.setCourseId(courseId);
+       // myRef.child("searchCourse").child(course.getCourseName()).child(courseId).setValue(course);
     }
 
 

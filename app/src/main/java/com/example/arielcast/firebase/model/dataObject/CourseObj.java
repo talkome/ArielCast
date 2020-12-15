@@ -5,10 +5,10 @@ public class CourseObj {
     String courseName;
     String lecturerId;
     String semester;
-    int year;
-    int credits;
+    String year;
+    String credits;
 
-    public  CourseObj(String courseId,String courseName,String lecturerId,String semester,int year,int credits)
+    public  CourseObj(String courseName, String lecturerId, String semester, String year, String credits, String courseId)
     {
         this.courseId=courseId;
         this.courseName=courseName;
@@ -50,19 +50,19 @@ public class CourseObj {
         return semester;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setCredits(int credits) {
+    public void setCredits(String credits) {
         this.credits = credits;
     }
 
-    public int getCredits() {
+    public String getCredits() {
         return credits;
     }
 }
