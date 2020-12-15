@@ -21,7 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.nio.charset.Charset;
 import java.util.Objects;
+import java.util.Random;
 
 public class AddCourseActivity extends AppCompatActivity {
     EditText courseName,semester,year,credits;
@@ -68,10 +70,13 @@ public class AddCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                String id= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                CourseObj course=new CourseObj(id,courseName.getText().toString().trim(), lecId, semester.getText().toString().trim(),
-                        year.getText().toString().trim(), credits.getText().toString().trim());
-                FirebaseDatabase.getInstance().getReference().child("Courses").child(id).setValue(course)
+                byte[] array = new byte[7]; // length is bounded by 7
+                new Random().nextBytes(array);
+                String generatedString = new String(array, Charset.forName("UTF-8")); // Course id
+
+                CourseObj course=new CourseObj(courseName.getText().toString().trim(), lecId, semester.getText().toString().trim(),
+                        year.getText().toString().trim(), credits.getText().toString().trim(),generatedString);
+                FirebaseDatabase.getInstance().getReference().child("Courses").child(generatedString).setValue(course)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
