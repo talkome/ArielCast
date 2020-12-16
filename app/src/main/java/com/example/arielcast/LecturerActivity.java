@@ -60,7 +60,7 @@ public class LecturerActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot data : snapshot.getChildren()) {
-                                String value = data.getValue(CourseObj.class).getCourseName();
+                                String value = data.child("courseName").getValue(String.class);
                                 coursesList.add(value);
                                 myArrayAdapter.notifyDataSetChanged();
                             }

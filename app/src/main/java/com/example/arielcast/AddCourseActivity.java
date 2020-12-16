@@ -96,7 +96,7 @@ public class AddCourseActivity extends AppCompatActivity {
                                     "Failed to add this course! try again",
                                     Toast.LENGTH_LONG).show();
                         }
-                        progressBar.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
 
                 });
