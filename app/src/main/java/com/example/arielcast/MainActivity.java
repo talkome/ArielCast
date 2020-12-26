@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 if (snapshot.exists()) {
                                     for(DataSnapshot data:snapshot.getChildren()) {
                                         Intent intent = new Intent(MainActivity.this, LecturerActivity.class);
-                                        String value = data.getValue(LecturerObj.class).getLecturerId();
+                                       String value = data.child("lecturerId").getValue(String.class);
                                         intent.putExtra("Email", email);
                                         intent.putExtra("ID",value);
                                         startActivity(intent);

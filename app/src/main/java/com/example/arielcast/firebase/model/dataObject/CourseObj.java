@@ -1,15 +1,14 @@
 package com.example.arielcast.firebase.model.dataObject;
 
 public class CourseObj {
-    String courseId;
+    Integer courseId;
     String courseName;
     String lecturerId;
     String semester;
     String year;
     String credits;
 
-    public  CourseObj(String courseName, String lecturerId, String semester, String year, String credits, String courseId)
-    {
+    public  CourseObj(Integer courseId,String courseName, String lecturerId, String semester, String year, String credits) {
         this.courseId=courseId;
         this.courseName=courseName;
         this.lecturerId=lecturerId;
@@ -18,11 +17,11 @@ public class CourseObj {
         this.credits=credits;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(Integer courseId) {
         this.courseId = courseId;
     }
 
-    public String getCourseId() {
+    public Integer getCourseId() {
         return courseId;
     }
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".LecturerActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -35,8 +36,7 @@
         android:layout_margin="@dimen/fab_margin"
         app:fabSize="normal"
         app:srcCompat="@android:drawable/ic_input_add"
-        tools:ignore="ContentDescription"
-         />
+        tools:ignore="ContentDescription" />
 
     <ListView
         android:id="@+id/listView"

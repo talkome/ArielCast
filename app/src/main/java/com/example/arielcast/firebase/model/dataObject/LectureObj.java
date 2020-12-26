@@ -1,10 +1,18 @@
 package com.example.arielcast.firebase.model.dataObject;
 
 public class LectureObj {
-    private String lectureName,lecturerId, video_url, search,courseId;
+     String lectureId,lectureName,lecturerId, video_url, search,courseId;
 
     public LectureObj() {
 
+    }
+
+    public String getLectureId() {
+        return lectureId;
+    }
+
+    public void setLectureId(java.lang.String lectureId) {
+        this.lectureId = lectureId;
     }
 
     public String getLectureName() {

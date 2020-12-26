@@ -1,17 +1,27 @@
 package com.example.arielcast.firebase.model.dataObject;
 
 public class StudentObj {
+    String studentId;
      String email;
      String fullname;
      String phone;
      String password;
 
-    public StudentObj(String email,String fullname,String phone,String password)
+    public StudentObj(String id,String email,String fullname,String phone,String password)
     {
+        this.studentId=id;
         this.email=email;
         this.fullname=fullname;
         this.phone=phone;
         this.password=password;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
     public void setPassword(String password) {

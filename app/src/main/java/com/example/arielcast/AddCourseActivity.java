@@ -1,5 +1,6 @@
 package com.example.arielcast;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arielcast.firebase.model.dataObject.CourseObj;
+import com.example.arielcast.firebase.model.dataObject.LecturerObj;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -70,38 +76,33 @@ public class AddCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                byte[] array = new byte[7]; // length is bounded by 7
-                new Random().nextBytes(array);
-                String generatedString = new String(array, Charset.forName("UTF-8")); // Course id
+               DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Lecturers");
 
-                CourseObj course=new CourseObj(courseName.getText().toString().trim(), lecId, semester.getText().toString().trim(),
-                        year.getText().toString().trim(), credits.getText().toString().trim(),generatedString);
-                FirebaseDatabase.getInstance().getReference().child("Courses").child(generatedString).setValue(course)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                Query myOrderPostsQuery = myRef.orderByChild("lecturerId").equalTo(lecId);
+
+                myOrderPostsQuery.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                        if (task.isSuccessful()) {
-                            Toast.makeText(AddCourseActivity.this,
-                                    "your new course added successfully!",
-                                    Toast.LENGTH_LONG).show();
-
-                            // back to Main Screen - lecturer activity
-                            Intent intent = new Intent(v.getContext(),LecturerActivity.class);
-                            intent.putExtra("Email",email);
-                            intent.putExtra("ID",lecId);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(AddCourseActivity.this,
-                                    "Failed to add this course! try again",
-                                    Toast.LENGTH_LONG).show();
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot data : snapshot.getChildren()) {
+                            if(data.getKey().equals(lecId)) {
+                                LecturerObj lec = (data.getValue(LecturerObj.class));
+                                Context t=AddCourseActivity.this;
+                                lec.addCourse(t,progressBar, v, courseName, semester, year, credits);
+                            }
                         }
-                        progressBar.setVisibility(View.INVISIBLE);
+
                     }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
                 });
+
             }
         });
 
     }
+
+
 }

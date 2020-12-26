@@ -127,11 +127,12 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             // ADD STUDENT TO DATABASE
                             //FirebaseDBStudents st=new FirebaseDBStudents();
-                            StudentObj user = new StudentObj(email, fullName, phone, password);
+                            String sId=Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                            StudentObj user = new StudentObj(sId,email, fullName, phone, password);
                             // st.addStudentToDB(user);
 
                             FirebaseDatabase.getInstance().getReference("Students")
-                                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                                    .child(sId)
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
