@@ -34,7 +34,6 @@ public class StudentActivity extends AppCompatActivity {
     FirebaseRecyclerOptions<Course> options;
     FirebaseRecyclerAdapter<Course,MyViewHolder> adapter;
     DatabaseReference DataRef;
-//    ArrayList<String> coursesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
