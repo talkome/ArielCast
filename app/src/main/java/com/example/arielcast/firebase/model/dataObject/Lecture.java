@@ -1,9 +1,9 @@
 package com.example.arielcast.firebase.model.dataObject;
 
-public class LectureObj {
+public class Lecture {
      String lectureId,lectureName,lecturerId, video_url, search,courseId;
 
-    public LectureObj() {
+    public Lecture() {
 
     }
 

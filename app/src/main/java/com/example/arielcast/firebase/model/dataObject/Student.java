@@ -1,13 +1,13 @@
 package com.example.arielcast.firebase.model.dataObject;
 
-public class StudentObj {
+public class Student {
     String studentId;
      String email;
      String fullname;
      String phone;
      String password;
 
-    public StudentObj(String id,String email,String fullname,String phone,String password)
+    public Student(String id, String email, String fullname, String phone, String password)
     {
         this.studentId=id;
         this.email=email;

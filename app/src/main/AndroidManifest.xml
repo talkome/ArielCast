@@ -10,13 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArielCast">
         <activity
+            android:name=".ShowLecture"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity android:name=".ShowCourse" />
+        <activity
             android:name=".LecturerActivity"
             android:label="@string/title_activity_lecturer"
-            android:theme="@style/Theme.ArielCast.NoActionBar"></activity>
+            android:theme="@style/Theme.ArielCast.NoActionBar" />
         <activity android:name=".AddLectureActivity" />
         <activity android:name=".StudentActivity" />
         <activity android:name=".RegisterUser" />
-        <activity android:name=".AddCourseActivity"/>
+        <activity android:name=".AddCourseActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

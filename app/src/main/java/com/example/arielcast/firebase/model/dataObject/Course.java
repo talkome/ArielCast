@@ -1,20 +1,34 @@
 package com.example.arielcast.firebase.model.dataObject;
 
-public class CourseObj {
+import android.widget.ImageView;
+
+public class Course {
+    int image;
     Integer courseId;
     String courseName;
     String lecturerId;
     String semester;
     String year;
-    String credits;
+    String description;
 
-    public  CourseObj(Integer courseId,String courseName, String lecturerId, String semester, String year, String credits) {
+    public Course() {
+        this.courseId = 0;
+        this.courseName = "";
+        this.lecturerId = "";
+        this.semester = "";
+        this.year = "";
+        this.description = "";
+        this.image = 0;
+    }
+
+    public Course(Integer courseId, String courseName, String lecturerId, String semester, String year, String credits, String description, int image) {
         this.courseId=courseId;
         this.courseName=courseName;
         this.lecturerId=lecturerId;
         this.semester=semester;
         this.year=year;
-        this.credits=credits;
+        this.description = description;
+        this.image = image;
     }
 
     public void setCourseId(Integer courseId) {
@@ -57,11 +71,19 @@ public class CourseObj {
         return year;
     }
 
-    public void setCredits(String credits) {
-        this.credits = credits;
+    public String getDescription() {
+        return description;
     }
 
-    public String getCredits() {
-        return credits;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 }

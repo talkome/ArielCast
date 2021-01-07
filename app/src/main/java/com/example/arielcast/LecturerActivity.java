@@ -1,23 +1,17 @@
 package com.example.arielcast;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SharedMemory;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.arielcast.firebase.model.dataObject.CourseObj;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,13 +34,13 @@ public class LecturerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecturer);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        ListView lv = findViewById(R.id.listView);
+        coursesListView = findViewById(R.id.listView);
         setSupportActionBar(toolbar);
 
         // get lecturer's email from MainActivity
         Intent intent = getIntent();
         String email = intent.getExtras().getString("Email");
-        String lecId=intent.getExtras().getString("ID");
+        String lecId = intent.getExtras().getString("ID");
 
         //show my courses
         final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<>(LecturerActivity.this, android.R.layout.simple_list_item_1, coursesList);
@@ -70,10 +64,7 @@ public class LecturerActivity extends AppCompatActivity {
                                     coursesList.add(value);
 
                                 myArrayAdapter.notifyDataSetChanged();
-
-
                             }
-
                         }
 
                         @Override

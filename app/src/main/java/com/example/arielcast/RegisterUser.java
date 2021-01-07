@@ -3,24 +3,20 @@ package com.example.arielcast;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.arielcast.firebase.model.FirebaseDBLecturers;
-import com.example.arielcast.firebase.model.FirebaseDBStudents;
-import com.example.arielcast.firebase.model.dataObject.LecturerObj;
-import com.example.arielcast.firebase.model.dataObject.StudentObj;
+import com.example.arielcast.firebase.model.dataObject.Lecturer;
+import com.example.arielcast.firebase.model.dataObject.Student;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -58,15 +54,14 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.banner) {
+        if (v.getId() == R.id.banner)
             startActivity(new Intent(this, MainActivity.class));
-        } else if (v.getId() == R.id.register) {
+        else if (v.getId() == R.id.register) {
             cb = findViewById(R.id.cbLecturer);
-            if (cb.isChecked()) {
+            if (cb.isChecked())
                 registerLecturer(v);
-            } else {
+            else
                 registerUser(v);
-            }
         }
     }
 
@@ -128,7 +123,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                             // ADD STUDENT TO DATABASE
                             //FirebaseDBStudents st=new FirebaseDBStudents();
                             String sId=Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                            StudentObj user = new StudentObj(sId,email, fullName, phone, password);
+                            Student user = new Student(sId,email, fullName, phone, password);
                             // st.addStudentToDB(user);
 
                             FirebaseDatabase.getInstance().getReference("Students")
@@ -145,11 +140,10 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                         // back to Main Screen - login
                                         Intent intent = new Intent(v.getContext(), MainActivity.class);
                                         startActivity(intent);
-                                    } else {
+                                    } else
                                         Toast.makeText(RegisterUser.this,
                                                 "Failed to register! try again",
                                                 Toast.LENGTH_LONG).show();
-                                    }
                                     progressBar.setVisibility(View.GONE);
                                 }
                             });
@@ -170,7 +164,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         String password = editTextPassword.getText().toString().trim();
         String fullName = editTextFullName.getText().toString().trim();
         String phone = editTextPhone.getText().toString().trim();
-        //  String course=editTextCourse.getText().toString().trim();
 
         if (fullName.isEmpty()) {
             editTextFullName.setError("Full name is required!");
@@ -223,10 +216,8 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
                         if (task.isSuccessful()) {
                             // ADD STUDENT TO DATABASE
-                            // FirebaseDBLecturers st=new FirebaseDBLecturers();
                             String LecId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                            LecturerObj user = new LecturerObj(LecId, email, password, fullName, phone);
-                            // st.addStudentToDB(user);
+                            Lecturer user = new Lecturer(LecId, email, password, fullName, phone);
 
                             FirebaseDatabase.getInstance().getReference("Lecturers").child(LecId)
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -260,5 +251,3 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 });
     }
 }
-
-

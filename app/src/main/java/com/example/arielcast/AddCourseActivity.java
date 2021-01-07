@@ -10,13 +10,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.arielcast.firebase.model.dataObject.CourseObj;
-import com.example.arielcast.firebase.model.dataObject.LecturerObj;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.arielcast.firebase.model.dataObject.Lecturer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,10 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.nio.charset.Charset;
-import java.util.Objects;
-import java.util.Random;
 
 public class AddCourseActivity extends AppCompatActivity {
     EditText courseName,semester,year,credits;
@@ -85,7 +76,7 @@ public class AddCourseActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot data : snapshot.getChildren()) {
                             if(data.getKey().equals(lecId)) {
-                                LecturerObj lec = (data.getValue(LecturerObj.class));
+                                Lecturer lec = (data.getValue(Lecturer.class));
                                 Context t=AddCourseActivity.this;
                                 lec.addCourse(t,progressBar, v, courseName, semester, year, credits);
                             }

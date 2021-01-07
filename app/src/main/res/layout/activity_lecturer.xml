@@ -41,9 +41,9 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="771dp"
+        android:layout_height="match_parent"
         android:textAlignment="center"
-        android:textSize="24dp"
+        android:textSize="24sp"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="center" />
 

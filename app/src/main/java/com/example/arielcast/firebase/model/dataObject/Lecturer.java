@@ -1,6 +1,5 @@
 package com.example.arielcast.firebase.model.dataObject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -9,16 +8,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import com.example.arielcast.AddCourseActivity;
 import com.example.arielcast.LecturerActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class LecturerObj  {
+public class Lecturer {
     String lecturerId;
     String email;
     String password;
@@ -26,7 +22,7 @@ public class LecturerObj  {
     String phone;
 
 
-    public LecturerObj(String lecturerId, String email, String password, String fullname, String phone) {
+    public Lecturer(String lecturerId, String email, String password, String fullname, String phone) {
         this.lecturerId = lecturerId;
         this.email = email;
         this.password = password;
@@ -35,11 +31,11 @@ public class LecturerObj  {
 
     }
 
-    public LecturerObj() {
+    public Lecturer() {
 
     }
 
-    public <T> LecturerObj(LecturerObj lec) {
+    public <T> Lecturer(Lecturer lec) {
         this.lecturerId=lec.getLecturerId();
         this.email=lec.getEmail();
         this.password=lec.getPassword();
@@ -51,8 +47,8 @@ public class LecturerObj  {
         //  while this id not exist already!!
         Integer generatedId = generatRandomPositiveNegitiveValue(90000, 0); // Course id
 
-        CourseObj course = new CourseObj(generatedId, courseName.getText().toString().trim(), lecturerId, semester.getText().toString().trim(),
-                year.getText().toString().trim(), credits.getText().toString().trim());
+        Course course = new Course(generatedId, courseName.getText().toString().trim(), lecturerId, semester.getText().toString().trim(),
+                year.getText().toString().trim(), credits.getText().toString().trim(), "",0);
         FirebaseDatabase.getInstance().getReference().child("Courses").child(String.valueOf(generatedId)).setValue(course)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

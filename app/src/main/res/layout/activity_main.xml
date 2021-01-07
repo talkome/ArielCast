@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,8 +13,8 @@
         android:id="@+id/banner"
         android:layout_width="283dp"
         android:layout_height="87dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="82dp"
         android:fontFamily="casual"
         android:text="ArielCast"
         android:textAlignment="center"
@@ -26,43 +27,48 @@
 
     <EditText
         android:id="@+id/emailAddress"
-        android:layout_width="393dp"
+        android:layout_width="0dp"
         android:layout_height="76dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="6dp"
         android:ems="10"
         android:hint="@string/email_address"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/password1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:ignore="MissingConstraints"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/password1"
-        android:layout_width="394dp"
-        android:layout_height="78dp"
-        android:layout_marginBottom="36dp"
+        android:layout_width="0dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="password"
+        android:hint="@string/login_password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/signIn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/emailAddress"
+        tools:ignore="MissingConstraints"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/signIn"
         android:layout_width="0dp"
         android:layout_height="81dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
         android:onClick="onClick"
         android:text="@string/login"
-        app:layout_constraintBottom_toTopOf="@+id/setNewPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password1"
         app:strokeColor="#3949AB"
         tools:ignore="MissingConstraints" />
 
@@ -70,34 +76,31 @@
         android:id="@+id/setNewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginBottom="241dp"
         android:text="@string/forgot_password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/signIn"
+        app:layout_constraintTop_toBottomOf="@+id/signIn"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/register1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="5dp"
         android:text="register"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/signIn"
         app:layout_constraintTop_toBottomOf="@+id/signIn"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="259dp"
-        android:layout_height="222dp"
-        android:layout_marginStart="203dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="147dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/banner"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_bannerlogo_foreground"
-        tools:srcCompat="@mipmap/ic_bannerlogo_foreground" />
-
+        tools:srcCompat="@mipmap/ic_bannerlogo_foreground"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.example.arielcast.firebase.model.dataObject.LectureObj;
+import com.example.arielcast.firebase.model.dataObject.Lecture;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +38,7 @@ public class AddLectureActivity extends AppCompatActivity{
     EditText editText;
     Uri videoUri;
     MediaController mediaController;
-    LectureObj lecture;
+    Lecture lecture;
     StorageReference storageReference;
     DatabaseReference databaseReference;
     UploadTask uploadTask;
@@ -50,7 +50,7 @@ public class AddLectureActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_lecture);
 
-        lecture = new LectureObj();
+        lecture = new Lecture();
         storageReference = FirebaseStorage.getInstance().getReference().child("Video");
         databaseReference = FirebaseDatabase.getInstance().getReference().child("video");
 
@@ -67,14 +67,10 @@ public class AddLectureActivity extends AppCompatActivity{
 
         addLec.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                     UploadVideo();
-
             }
         });
-
-
     }
 
     @Override
@@ -82,8 +78,7 @@ public class AddLectureActivity extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_VIDEO || requestCode == RESULT_OK ||
-                data != null || data.getData() != null)
-        {
+                data != null || data.getData() != null) {
             videoUri = data.getData();
             videoView.setVideoURI(videoUri);
         }
@@ -109,8 +104,7 @@ public class AddLectureActivity extends AppCompatActivity{
     private void UploadVideo(){
         String videoName = editText.getText().toString();
         String search = editText.getText().toString().toLowerCase();
-        if (videoUri != null )
-        {
+        if (videoUri != null ) {
             if(!TextUtils.isEmpty(videoName)) {
                 progressBar.setVisibility(View.VISIBLE);
                 final StorageReference myRef = storageReference.child(currentTimeMillis() + "." + getExt(videoUri));
@@ -151,14 +145,11 @@ public class AddLectureActivity extends AppCompatActivity{
                     }
                 });
             }
-            }
-            else if (TextUtils.isEmpty(videoName))
-            {
+            } else if (TextUtils.isEmpty(videoName)) {
                 editText.setError("please enter video name");
                 editText.requestFocus();
                 return;
-            }
-         else {
+            } else {
             Toast.makeText(this,"All Fields are required",Toast.LENGTH_SHORT).show();
         }
     }
