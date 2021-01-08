@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,9 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddCourseActivity extends AppCompatActivity {
-    EditText courseName,semester,year,credits;
+    EditText courseName,startDate,endDate,image;
     Button button;
-    ImageButton imageButton;
     ImageView imagelogo;
     TextView textlogo;
     DatabaseReference databaseReference;
@@ -37,9 +35,9 @@ public class AddCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_addcourse);
 
         courseName=findViewById(R.id.courseName);
-        semester=findViewById(R.id.semester);
-        year=findViewById(R.id.year);
-        credits=findViewById(R.id.credits);
+        startDate=findViewById(R.id.startDate);
+        endDate=findViewById(R.id.endDate);
+        image=findViewById(R.id.image);
         button=findViewById(R.id.button);
         textlogo=findViewById(R.id.viewlogo);
         imagelogo=findViewById(R.id.imagelogo);
@@ -50,18 +48,7 @@ public class AddCourseActivity extends AppCompatActivity {
         String email = intent.getExtras().getString("Email");
         String lecId=intent.getExtras().getString("ID");
 
-        imageButton=findViewById(R.id.imageButton);
 
-
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(AddCourseActivity.this, LecturerActivity.class);
-                i.putExtra("Email",email);
-                i.putExtra("ID",lecId);
-                startActivity(i);
-            }
-        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +65,7 @@ public class AddCourseActivity extends AppCompatActivity {
                             if(data.getKey().equals(lecId)) {
                                 Lecturer lec = (data.getValue(Lecturer.class));
                                 Context t=AddCourseActivity.this;
-                                lec.addCourse(t,progressBar, v, courseName, semester, year, credits);
+                                lec.addCourse(t,progressBar, v, courseName, startDate, endDate, image);
                             }
                         }
 

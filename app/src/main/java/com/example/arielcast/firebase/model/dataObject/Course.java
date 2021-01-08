@@ -2,32 +2,33 @@ package com.example.arielcast.firebase.model.dataObject;
 
 import android.widget.ImageView;
 
-public class Course {
+import java.text.SimpleDateFormat;
+
+public class Course
+{
     int image;
     Integer courseId;
     String courseName;
     String lecturerId;
-    String semester;
-    String year;
-    String description;
+    String startDate;
+    String endDate;
+
 
     public Course() {
         this.courseId = 0;
         this.courseName = "";
         this.lecturerId = "";
-        this.semester = "";
-        this.year = "";
-        this.description = "";
+        this.startDate = "";
+        this.endDate = "";
         this.image = 0;
     }
 
-    public Course(Integer courseId, String courseName, String lecturerId, String semester, String year, String credits, String description, int image) {
+    public Course(Integer courseId, String courseName, String lecturerId, String start, String end, String description, int image) {
         this.courseId=courseId;
         this.courseName=courseName;
         this.lecturerId=lecturerId;
-        this.semester=semester;
-        this.year=year;
-        this.description = description;
+        this.startDate=start;
+        this.endDate=end;
         this.image = image;
     }
 
@@ -55,28 +56,20 @@ public class Course {
         return lecturerId;
     }
 
-    public void setSemester(String semester) {
-        this.semester = semester;
+    public void setSemester(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getSemester() {
-        return semester;
+        return startDate;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public void setYear(String endDate) {
+        this.endDate = endDate;
     }
 
     public String getYear() {
-        return year;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+        return endDate;
     }
 
     public int getImage() {
