@@ -11,7 +11,10 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.arielcast.firebase.model.dataObject.Course;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,31 +29,37 @@ import java.util.Objects;
 public class LecturerActivity extends AppCompatActivity {
 
     DatabaseReference myRef;
-    ListView coursesListView;
-    ArrayList<String> coursesList = new ArrayList<>();
+   RecyclerView coursesListView;
+    // ArrayList<String> coursesList = new ArrayList<>();
+    MyAdapter myAdapter;
+    ArrayList<Course> courses ;
+    String email ,lecId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecturer);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        coursesListView = findViewById(R.id.listView);
+        coursesListView = findViewById(R.id.recycleView);
+        coursesListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        coursesListView.setHasFixedSize(true);
+
         setSupportActionBar(toolbar);
 
         // get lecturer's email from MainActivity
         Intent intent = getIntent();
-        String email = intent.getExtras().getString("Email");
-        String lecId = intent.getExtras().getString("ID");
+         email = intent.getExtras().getString("Email");
+         lecId = intent.getExtras().getString("ID");
 
         //show my courses
-        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<>(LecturerActivity.this, android.R.layout.simple_list_item_1, coursesList);
+         myAdapter =new MyAdapter (this, getMyList());
 
-        coursesListView = findViewById(R.id.listView);
-        coursesListView.setAdapter(myArrayAdapter);
-        coursesList.add("");
-        myArrayAdapter.notifyDataSetChanged();
+        coursesListView = findViewById(R.id.recycleView);
+        coursesListView.setAdapter(myAdapter);
+
+        myAdapter.notifyDataSetChanged();
         
-
+/*
         myRef = FirebaseDatabase.getInstance().getReference().child("Courses");
 
                     Query myOrderPostsQuery = myRef.orderByChild("lecturerId").equalTo(lecId);
@@ -63,7 +72,7 @@ public class LecturerActivity extends AppCompatActivity {
                                     String value = data.child("courseName").getValue(String.class);
                                     coursesList.add(value);
 
-                                myArrayAdapter.notifyDataSetChanged();
+                                myAdapter.notifyDataSetChanged();
                             }
                         }
 
@@ -87,8 +96,6 @@ public class LecturerActivity extends AppCompatActivity {
 
 
 
-
-
         // add lecture Button
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -104,5 +111,32 @@ public class LecturerActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    private ArrayList<Course> getMyList(){
+        courses = new ArrayList<>();
+
+        Query q = FirebaseDatabase.getInstance().getReference().child("Courses").child("").orderByChild("lecturerId").equalTo(lecId);
+
+
+        q.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    Course c = data.getValue(Course.class);
+                    courses.add(c);
+                    myAdapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return courses;
     }
 }

@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class ShowCourse extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class ShowCourse extends AppCompatActivity {
     Button deleteButton;
     DatabaseReference ref;
     int position;
+    String lecturername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +37,37 @@ public class ShowCourse extends AppCompatActivity {
         ref = FirebaseDatabase.getInstance().getReference().child("Courses");
 
         String email= getIntent().getExtras().getString("Email");
-        Toast.makeText(ShowCourse.this,
-                "Welcome "+email+" !",
-                Toast.LENGTH_LONG).show();
+        int cID=getIntent().getExtras().getInt("CourseId");
 
-        ref.child("Email").addValueEventListener(new ValueEventListener() {
+       // Toast.makeText(ShowCourse.this,"Course ID : "+cID+" !",Toast.LENGTH_LONG).show();
+
+        ref.child(String.valueOf(cID)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    String courseName = snapshot.child("courseName").getKey();
-                    String lecturerID = snapshot.child("lecturerId").getKey();
+                    String courseName = snapshot.child("courseName").getValue(String.class);
+                    String lecturerID = snapshot.child("lecturerId").getValue(String.class);
+
+                    // get lecturer name
+                    Query q=FirebaseDatabase.getInstance().getReference().child("Lecturers").orderByChild("lecturerId").equalTo(lecturerID);
+
+                    q.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot data : snapshot.getChildren()) {
+                                lecturername = data.child("fullname").getValue(String.class);
+                                description.setText("Lecturer : "+lecturername);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                    title.setText(courseName);
+                    // description.setText("Lecturer : "+lecturername);
                 }
             }
 
@@ -53,5 +76,18 @@ public class ShowCourse extends AppCompatActivity {
 
             }
         });
+
+/*
+        // get lectures list
+        Query q=FirebaseDatabase.getInstance().getReference().child("Videos").orderByChild("lecturerId").equalTo(lecturerID);
+
+        q.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    lecturername = data.child("fullname").getValue(String.class);
+                    description.setText("Lecturer : "+lecturername);
+                }
+            });*/
     }
 }

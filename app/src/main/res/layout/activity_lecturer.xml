@@ -22,9 +22,17 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="883dp"
+        android:layout_below="@+id/appBarLayout" />
+
     <include
         android:id="@+id/include"
         layout="@layout/content_lecturer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="center" />
 
@@ -38,14 +46,6 @@
         app:srcCompat="@android:drawable/ic_input_add"
         tools:ignore="ContentDescription" />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="center" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

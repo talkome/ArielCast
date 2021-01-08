@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class StudentActivity extends AppCompatActivity {
     FirebaseRecyclerOptions<Course> options;
     FirebaseRecyclerAdapter<Course,MyViewHolder> adapter;
     DatabaseReference DataRef;
+    ArrayList<Course> courses ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class StudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student);
 
         inputSearch = findViewById(R.id.inputSearch);
-        studentListView = findViewById(R.id.student_listview);
+        studentListView = findViewById(R.id.recycleView);
         studentListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         studentListView.setHasFixedSize(true);
 
@@ -50,23 +52,19 @@ public class StudentActivity extends AppCompatActivity {
         myAdapter = new MyAdapter(this, getMyList());
         studentListView.setAdapter(myAdapter);
 
-//        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<>(StudentActivity.this,
-//                android.R.layout.simple_list_item_1, coursesList);
-//        studentListView.setAdapter(myArrayAdapter);
 
         // get student's email from MainActivity
         Intent intent = getIntent();
         String email= intent.getExtras().getString("Email");
-        Toast.makeText(StudentActivity.this,
-                "Welcome "+email+" !",
-                Toast.LENGTH_LONG).show();
 
-        LoadData();
+        // LoadData();
     }
 
     private void LoadData() {
-        options = new FirebaseRecyclerOptions.Builder<Course>().
-                setQuery(DataRef,Course.class).build();
+       options = new FirebaseRecyclerOptions.Builder<Course>().
+               setQuery(DataRef,Course.class).build();
+
+
         adapter = new FirebaseRecyclerAdapter<Course, MyViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Course model) {
@@ -74,12 +72,15 @@ public class StudentActivity extends AppCompatActivity {
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(StudentActivity.this, ShowCourse.class);
-                        intent.putExtra("CarKey",getRef(position).getKey());
+                        Intent intent=new Intent(getApplicationContext(),ShowCourse.class);
+                        intent.putExtra("CourseId",model.getCourseId());
                         startActivity(intent);
                     }
                 });
+
+
             }
+
 
             @NonNull
             @Override
@@ -92,12 +93,28 @@ public class StudentActivity extends AppCompatActivity {
     }
 
     private ArrayList<Course> getMyList(){
-        ArrayList<Course> courses = new ArrayList<>();
-        Course course = new Course();
-        course.setCourseName("New Course");
-        course.setDescription("Description");
-        course.setImage(R.drawable.ariel_lec);
-        courses.add(course);
+        courses = new ArrayList<>();
+
+               Query q = FirebaseDatabase.getInstance().getReference().child("Courses");
+
+
+                q.addValueEventListener(new ValueEventListener() {
+                    @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot data : snapshot.getChildren()) {
+                            Course c = data.getValue(Course.class);
+                            courses.add(c);
+                            myAdapter.notifyDataSetChanged();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
         return courses;
     }
 }
