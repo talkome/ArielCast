@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Course> getMyList(){
         courses = new ArrayList<>();
 
+
         Query q = FirebaseDatabase.getInstance().getReference().child("Courses").child("").orderByChild("lecturerId").equalTo(lecId);
 
         q.addValueEventListener(new ValueEventListener() {
@@ -118,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
                     Course c = data.getValue(Course.class);
                     courses.add(c);
                     myAdapter.notifyDataSetChanged();
+
+
                 }
 
             }

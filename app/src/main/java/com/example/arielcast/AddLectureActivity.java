@@ -153,6 +153,8 @@ public class AddLectureActivity extends AppCompatActivity{
                             databaseReference.child(videoName).setValue(lecture);
                             Intent i=new Intent(AddLectureActivity.this, MainActivity.class);
                             i.putExtra("Email",lecturerEmail);
+                            i.putExtra("ID",lecId);
+                            i.putExtra("lecID",cId);
                             startActivity(i);
                         } else {
                             Toast.makeText(AddLectureActivity.this, "Failed",
