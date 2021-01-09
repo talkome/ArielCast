@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+
+                    //check if it's lecturer user or student user
                         Query query = myRef.child("Lecturers").orderByChild("email").equalTo(email);
 
                         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         Intent intent = new Intent(MainActivity.this, LecturerActivity.class);
                                        String value = data.child("lecturerId").getValue(String.class);
                                         intent.putExtra("Email", email);
-                                        intent.putExtra("ID",value);
+                                        intent.putExtra("ID", value);
                                         startActivity(intent);
                                     }
                                 } else {
@@ -121,9 +123,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             if (snapshot.exists()) {
-                                                Intent intent=new Intent(MainActivity.this, StudentActivity.class);
-                                                intent.putExtra("Email",email);
-                                                startActivity(intent);
+                                                for(DataSnapshot data:snapshot.getChildren()) {
+                                                    Intent intent = new Intent(MainActivity.this, StudentActivity.class);
+                                                    String value = data.getKey();
+                                                    intent.putExtra("Email", email);
+                                                    intent.putExtra("ID", value);
+                                                    startActivity(intent);
+                                                }
                                             } else {
                                                 editTextEmail.setError("Please provide valid email");
                                                 editTextEmail.requestFocus();

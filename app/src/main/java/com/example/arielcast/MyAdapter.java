@@ -2,8 +2,6 @@ package com.example.arielcast;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,19 +16,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     Context context;
     ArrayList<Course> courses;
+    String userId;
 
-    public MyAdapter(Context context, ArrayList<Course> courses) {
+    public MyAdapter(Context context, ArrayList<Course> courses, String userID) {
         this.context = context;
         this.courses = courses;
+        this.userId=userID;
     }
 
     @NonNull
@@ -66,7 +62,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
         });
 
 
-        //TODO : get uri from firebase storage
+        //TODO : get uri from image link (firebase storage)
       //  holder.mImageView.setImageURI(courses.get(position).getImage_uri());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +71,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
                 Intent intent=new Intent(context,ShowCourse.class);
                 intent.putExtra("CourseId",courses.get(position).getCourseId());
                 intent.putExtra("lecID",courses.get(position).getLecturerId());
+                intent.putExtra("ID",userId);
                 context.startActivity(intent);
             }
         });

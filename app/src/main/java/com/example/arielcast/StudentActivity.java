@@ -37,6 +37,8 @@ public class StudentActivity extends AppCompatActivity {
     FirebaseRecyclerAdapter<Course,MyViewHolder> adapter;
     DatabaseReference DataRef;
     ArrayList<Course> courses ;
+    String email,id;
+    String UserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +49,19 @@ public class StudentActivity extends AppCompatActivity {
         studentListView = findViewById(R.id.recycleView);
         studentListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         studentListView.setHasFixedSize(true);
+        // get student's email from MainActivity
+        Intent intent = getIntent();
+        email= intent.getExtras().getString("Email");
+        id=intent.getExtras().getString("ID");
 
         DataRef = FirebaseDatabase.getInstance().getReference().child("Courses");
 
-        myAdapter = new MyAdapter(this, getMyList());
+        UserID=id;
+        myAdapter = new MyAdapter(this, getMyList(),UserID);
         studentListView.setAdapter(myAdapter);
 
 
-        // get student's email from MainActivity
-        Intent intent = getIntent();
-        String email= intent.getExtras().getString("Email");
+
 
         // LoadData();
     }
@@ -76,6 +81,7 @@ public class StudentActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent=new Intent(getApplicationContext(),ShowCourse.class);
                         intent.putExtra("CourseId",model.getCourseId());
+                        intent.putExtra("ID",id);
                         startActivity(intent);
                     }
                 });

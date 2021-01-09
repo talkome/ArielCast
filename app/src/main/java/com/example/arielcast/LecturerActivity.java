@@ -1,12 +1,8 @@
 package com.example.arielcast;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SharedMemory;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +20,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class LecturerActivity extends AppCompatActivity {
 
@@ -33,7 +28,8 @@ public class LecturerActivity extends AppCompatActivity {
     // ArrayList<String> coursesList = new ArrayList<>();
     MyAdapter myAdapter;
     ArrayList<Course> courses ;
-    String email ,lecId;
+    String email ,lecId,Id;
+    private String UserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +48,8 @@ public class LecturerActivity extends AppCompatActivity {
          lecId = intent.getExtras().getString("ID");
 
         //show my courses
-         myAdapter =new MyAdapter (this, getMyList());
+        UserID=lecId;
+        myAdapter = new MyAdapter(this, getMyList(),UserID);
 
         coursesListView = findViewById(R.id.recycleView);
         coursesListView.setAdapter(myAdapter);
