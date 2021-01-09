@@ -38,7 +38,7 @@ public class LecturerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lecturer);
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         coursesListView = findViewById(R.id.recycleView);
         coursesListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -52,7 +52,7 @@ public class LecturerActivity extends AppCompatActivity {
          lecId = intent.getExtras().getString("ID");
 
         //show my courses
-         myAdapter =new MyAdapter (this, getMyList());
+         myAdapter =new MyAdapter (this, getMyList(),lecId);
 
         coursesListView = findViewById(R.id.recycleView);
         coursesListView.setAdapter(myAdapter);

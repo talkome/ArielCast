@@ -37,6 +37,7 @@ public class StudentActivity extends AppCompatActivity {
     FirebaseRecyclerAdapter<Course,MyViewHolder> adapter;
     DatabaseReference DataRef;
     ArrayList<Course> courses ;
+    String email,id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +51,14 @@ public class StudentActivity extends AppCompatActivity {
 
         DataRef = FirebaseDatabase.getInstance().getReference().child("Courses");
 
-        myAdapter = new MyAdapter(this, getMyList());
+        myAdapter = new MyAdapter(this, getMyList(),id);
         studentListView.setAdapter(myAdapter);
 
 
         // get student's email from MainActivity
         Intent intent = getIntent();
-        String email= intent.getExtras().getString("Email");
+        email= intent.getExtras().getString("Email");
+        id= intent.getExtras().getString("ID");
 
         // LoadData();
     }
