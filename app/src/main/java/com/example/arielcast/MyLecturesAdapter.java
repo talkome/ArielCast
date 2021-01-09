@@ -42,7 +42,7 @@ public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 public void onClick(View v) {
         Intent intent=new Intent(context,ShowLecture.class);
         intent.putExtra("CourseId",lectures.get(position).getCourseId());
-        intent.putExtra("lecID",lectures.get(position).getLecturerId());
+        intent.putExtra("lecID",lectures.get(position).getLectureName());
         intent.putExtra("ID",userID);
         context.startActivity(intent);
         }

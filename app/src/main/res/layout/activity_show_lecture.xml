@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,22 +8,23 @@
     android:orientation="vertical"
     tools:context=".AddLectureActivity">
 
-        <VideoView
-            android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:id="@+id/lecture_display"
-            android:backgroundTint="@android:color/black"
-            />
+    <VideoView
+        android:id="@+id/lecture_view"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:backgroundTint="@android:color/black" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/lecture_name"
-            android:textSize="20sp"
-            android:id="@+id/et_video_name"
-            android:layout_margin="10dp"
-            android:backgroundTint="@color/design_default_color_background"
-            android:textColor="@android:color/black"
-            android:autofillHints="@string/arielcast" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lecture_name"
+        android:textSize="20sp"
+        android:id="@+id/et_video_name"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/design_default_color_background"
+        android:textColor="@android:color/black"
+        android:autofillHints="@string/arielcast"
+        tools:ignore="TextFields" />
+
 
     </LinearLayout>
