@@ -35,4 +35,5 @@
     <string name="sub_title">Sub Title</string>
     <string name="lecture_name">lecture_name</string>
     <string name="login_password">login_password</string>
+    <string name="logout">logout</string>
 </resources>

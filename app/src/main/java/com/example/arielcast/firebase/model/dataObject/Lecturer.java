@@ -2,7 +2,6 @@ package com.example.arielcast.firebase.model.dataObject;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -10,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.arielcast.LecturerActivity;
+import com.example.arielcast.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
@@ -63,7 +62,7 @@ public class Lecturer {
                                     Toast.LENGTH_LONG).show();
 
                             // back to Main Screen - lecturer activity
-                            Intent intent = new Intent(t, LecturerActivity.class);
+                            Intent intent = new Intent(t, MainActivity.class);
                             intent.putExtra("Email", email);
                             intent.putExtra("ID", lecturerId);
                             t.startActivity(intent);

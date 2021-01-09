@@ -15,7 +15,6 @@ public class Course
     String endDate;
 
 
-
     public Course() {
         this.courseId = "";
         this.courseName = "";

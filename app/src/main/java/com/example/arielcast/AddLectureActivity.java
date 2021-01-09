@@ -99,9 +99,9 @@ public class AddLectureActivity extends AppCompatActivity{
     }
 
     private String getExt(Uri uri){
-        ContentResolver contentResolver = getContentResolver(); //
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton(); //
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)); //
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)); 
     }
 
 
@@ -151,7 +151,7 @@ public class AddLectureActivity extends AppCompatActivity{
                             lecture.setDate(date);
                         //    lecture.setLecturerEmail(lecturerEmail); // id
                             databaseReference.child(videoName).setValue(lecture);
-                            Intent i=new Intent(AddLectureActivity.this, LecturerActivity.class);
+                            Intent i=new Intent(AddLectureActivity.this, MainActivity.class);
                             i.putExtra("Email",lecturerEmail);
                             startActivity(i);
                         } else {

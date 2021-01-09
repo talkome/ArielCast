@@ -1,7 +1,9 @@
 package com.example.arielcast;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -25,15 +27,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextEmail, editTextPassword;
     private FirebaseAuth mAuth;
+    private static final String LOGGED_IN_ACCOUNT = "com.example.arielcast.LOGGED_IN_ACCOUNT";
+    private SharedPreferences sharedPreferences;
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         TextView register = findViewById(R.id.register1);
         register.setOnClickListener(this);
@@ -44,11 +48,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView reset = findViewById(R.id.setNewPassword);
         reset.setOnClickListener(this);
 
-
         editTextEmail = findViewById(R.id.emailAddress);
         editTextPassword = findViewById(R.id.password1);
 
         mAuth = FirebaseAuth.getInstance();
+        sharedPreferences = getSharedPreferences(LOGGED_IN_ACCOUNT,Context.MODE_PRIVATE);
     }
 
     @SuppressLint({"SetTextI18n", "NonConstantResourceId"})
@@ -57,8 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.register1)
             startActivity(new Intent(this, RegisterUser.class));
 
-        if (v.getId() == R.id.signIn)
+        if (v.getId() == R.id.signIn){
             userLogin();
+        }
+
 
         if(v.getId() == R.id.setNewPassword) {
             String email = editTextEmail.getText().toString().trim();
@@ -71,6 +77,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void userLogin() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email",editTextEmail.getText().toString());
+        editor.putString("password",editTextPassword.getText().toString());
+        editor.apply();
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
@@ -109,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onDataChange(DataSnapshot snapshot) {
                                 if (snapshot.exists()) {
                                     for(DataSnapshot data:snapshot.getChildren()) {
-                                        Intent intent = new Intent(MainActivity.this, LecturerActivity.class);
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                        String value = data.child("lecturerId").getValue(String.class);
                                         intent.putExtra("Email", email);
                                         intent.putExtra("ID",value);
@@ -121,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             if (snapshot.exists()) {
-                                                Intent intent=new Intent(MainActivity.this, StudentActivity.class);
+                                                Intent intent=new Intent(LoginActivity.this, StudentActivity.class);
                                                 intent.putExtra("Email",email);
                                                 startActivity(intent);
                                             } else {
@@ -144,12 +154,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
 
                 } else {
-                    Toast.makeText(MainActivity.this,
+                    Toast.makeText(LoginActivity.this,
                             "Fail to login, please check your credentials",
                             Toast.LENGTH_LONG).show();
                 }
             }
-
         });
     }
 
