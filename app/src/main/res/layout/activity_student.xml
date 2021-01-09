@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,25 +9,39 @@
     android:orientation="vertical"
     tools:context=".StudentActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.ArielCast.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.ArielCast.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <EditText
         android:id="@+id/inputSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:background="@drawable/input_search"
-        android:drawableRight="@drawable/ic_search"
-        android:hint="Search Course"
-        android:paddingLeft="20dp"
+        android:drawableEnd="@drawable/ic_search"
+        android:hint="@string/search_course"
+        android:paddingStart="20dp"
         android:paddingTop="8dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="8dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/inputSearch"
-       />
-
+        android:paddingEnd="10dp"
+        android:paddingBottom="8dp"
+        android:autofillHints="@string/arielcast"
+        android:inputType="text" />
 
 </LinearLayout>
