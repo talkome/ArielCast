@@ -139,6 +139,7 @@ public class AddCourseActivity extends AppCompatActivity {
 
                             databaseReference.child(uniqueID).setValue(course);
                             Intent i=new Intent(AddCourseActivity.this, MainActivity.class);
+                            i.putExtra("ID",lecId);
                             i.putExtra("Email",email);
                             startActivity(i);
                         } else {

@@ -151,7 +151,7 @@ public class AddLectureActivity extends AppCompatActivity{
                             lecture.setDate(date);
                         //    lecture.setLecturerEmail(lecturerEmail); // id
                             databaseReference.child(videoName).setValue(lecture);
-                            Intent i=new Intent(AddLectureActivity.this, MainActivity.class);
+                            Intent i=new Intent(AddLectureActivity.this, ShowLecture.class);
                             i.putExtra("Email",lecturerEmail);
                             i.putExtra("ID",lecId);
                             i.putExtra("lecID",cId);
