@@ -79,9 +79,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
             }
         });
 
-
-
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +96,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
         return courses.size();
     }
 
-
-
+    public void filterList(ArrayList<Course> filteredList){
+        courses = filteredList;
+        notifyDataSetChanged();
+    }
 }
