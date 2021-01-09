@@ -1,5 +1,6 @@
 package com.example.arielcast;
 
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +25,6 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
     public void setImage(String image)
     {
-        Picasso.get().load(image).into(imageView);
+       // Picasso.load(Uri.parse(image)).into(imageView);
     }
 }

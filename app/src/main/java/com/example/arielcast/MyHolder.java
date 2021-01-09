@@ -20,7 +20,7 @@ public class MyHolder extends RecyclerView.ViewHolder {
 
     public MyHolder(@NonNull View itemView) {
         super(itemView);
-        this.mImageView = itemView.findViewById(R.id.imagelogo);
+        this.mImageView = itemView.findViewById(R.id.lecture_image);
         this.mTitle = itemView.findViewById(R.id.textViewMain);
         this.mDes = itemView.findViewById(R.id.textViewSub);
 

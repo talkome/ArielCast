@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -67,6 +68,24 @@ public class ShowCourse extends AppCompatActivity {
 
         myAdapter = new MyLecturesAdapter(this, getMyList(),Id);
         lecturesListView.setAdapter(myAdapter);
+
+
+        //get course image
+        DatabaseReference imRef = FirebaseDatabase.getInstance().getReference().child("Courses").child(cID);
+
+        imRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String url=snapshot.child("image").getValue(String.class);
+                Picasso.with(getApplicationContext()).load(url).fit().into((ImageView)imageView);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         ref.child(String.valueOf(cID)).addValueEventListener(new ValueEventListener() {
             @Override
