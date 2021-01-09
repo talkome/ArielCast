@@ -5,6 +5,7 @@ public class Lecture {
 
     public Lecture() {
 
+
     }
 
     public String getLectureId() {

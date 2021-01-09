@@ -1,7 +1,6 @@
 package com.example.arielcast;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,16 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arielcast.firebase.model.dataObject.Course;
-import com.example.arielcast.firebase.model.dataObject.Lecturer;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -42,9 +36,9 @@ public class AddCourseActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 1;
     EditText courseName,startDate,endDate,image;
     Button button,upload;
-    ImageView imagelogo;
+    ImageView imageLogo;
     ImageView imageView;
-    TextView textlogo;
+    TextView textLogo;
     StorageReference storageReference;
     DatabaseReference databaseReference;
     ProgressBar progressBar;
@@ -63,8 +57,8 @@ public class AddCourseActivity extends AppCompatActivity {
         endDate=findViewById(R.id.endDate);
         imageView=findViewById(R.id.image);
         button=findViewById(R.id.button);
-        textlogo=findViewById(R.id.viewlogo);
-        imagelogo=findViewById(R.id.imagelogo);
+        textLogo =findViewById(R.id.viewlogo);
+        imageLogo =findViewById(R.id.imagelogo);
         progressBar=findViewById(R.id.progressBar2);
         upload=findViewById(R.id.uploadImage);
         course=new Course();
@@ -75,8 +69,6 @@ public class AddCourseActivity extends AppCompatActivity {
         Intent intent = getIntent();
          email = intent.getExtras().getString("Email");
          lecId=intent.getExtras().getString("ID");
-
-
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +138,7 @@ public class AddCourseActivity extends AppCompatActivity {
 
 
                             databaseReference.child(uniqueID).setValue(course);
-                            Intent i=new Intent(AddCourseActivity.this, LecturerActivity.class);
+                            Intent i=new Intent(AddCourseActivity.this, MainActivity.class);
                             i.putExtra("Email",email);
                             startActivity(i);
                         } else {

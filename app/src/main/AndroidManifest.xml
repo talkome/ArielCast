@@ -15,14 +15,14 @@
         </activity>
         <activity android:name=".ShowCourse" />
         <activity
-            android:name=".LecturerActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_lecturer"
             android:theme="@style/Theme.ArielCast.NoActionBar" />
         <activity android:name=".AddLectureActivity" />
         <activity android:name=".StudentActivity" />
         <activity android:name=".RegisterUser" />
         <activity android:name=".AddCourseActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -55,7 +55,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.banner)
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
         else if (v.getId() == R.id.register) {
             cb = findViewById(R.id.cbLecturer);
             if (cb.isChecked())
@@ -138,7 +138,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                                 Toast.LENGTH_LONG).show();
 
                                         // back to Main Screen - login
-                                        Intent intent = new Intent(v.getContext(), MainActivity.class);
+                                        Intent intent = new Intent(v.getContext(), LoginActivity.class);
                                         startActivity(intent);
                                     } else
                                         Toast.makeText(RegisterUser.this,
@@ -230,7 +230,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                                 Toast.LENGTH_LONG).show();
 
                                         // back to Main Screen - login
-                                        Intent intent = new Intent(v.getContext(), MainActivity.class);
+                                        Intent intent = new Intent(v.getContext(), LoginActivity.class);
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(RegisterUser.this,
