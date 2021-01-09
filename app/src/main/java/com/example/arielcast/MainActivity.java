@@ -33,11 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    DatabaseReference myRef;
     RecyclerView coursesListView;
     MyAdapter myAdapter;
     ArrayList<Course> courses ;
-    Button logout;
     String email ,lecId;
 
     @Override
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         lecId = intent.getExtras().getString("ID");
 
         //show my courses
-        myAdapter =new MyAdapter (this, getMyList(),lecId);
+        myAdapter = new MyAdapter (this, getMyList(),lecId);
 
         coursesListView = findViewById(R.id.recycleView);
         coursesListView.setAdapter(myAdapter);
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 if(view.getId() == R.id.fab) {
 
                     // save lecturer's email and start AddLectureActivity
-                    Intent i = new  Intent(MainActivity.this,AddCourseActivity.class);
+                    Intent i = new  Intent(MainActivity.this, AddCourseActivity.class);
                     i.putExtra("Email",email);
                     i.putExtra("ID",lecId);
                     startActivity(i);
@@ -92,11 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.logout: {
-                logOut();
-                return true;
-            }
+        if (item.getItemId() == R.id.logout) {
+            logOut();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
