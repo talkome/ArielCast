@@ -81,4 +81,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     public int getItemCount() {
         return courses.size();
     }
+
+    public void filterList(ArrayList<Course> filteredList){
+        courses = filteredList;
+        notifyDataSetChanged();
+    }
 }

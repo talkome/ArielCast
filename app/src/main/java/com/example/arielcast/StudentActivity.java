@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,10 +52,26 @@ public class StudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        inputSearch = findViewById(R.id.inputSearch);
         studentListView = findViewById(R.id.recycleView);
         studentListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         studentListView.setHasFixedSize(true);
+        inputSearch = findViewById(R.id.inputSearch);
+        inputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
 
         setSupportActionBar(toolbar);
 
@@ -62,13 +80,22 @@ public class StudentActivity extends AppCompatActivity {
         myAdapter = new MyAdapter(this, getMyList(),id);
         studentListView.setAdapter(myAdapter);
 
-
         // get student's email from MainActivity
         Intent intent = getIntent();
         email= intent.getExtras().getString("Email");
         id= intent.getExtras().getString("ID");
 
         // LoadData();
+    }
+
+    private void filter(String text) {
+        ArrayList<Course> filterList = new ArrayList<>();
+        for (Course course: courses){
+            if (course.getCourseName().toLowerCase().contains(text.toLowerCase())){
+                filterList.add(course);
+            }
+        }
+        myAdapter.filterList(filterList);
     }
 
     @Override
