@@ -60,45 +60,8 @@ public class StudentActivity extends AppCompatActivity {
         myAdapter = new MyAdapter(this, getMyList(),UserID);
         studentListView.setAdapter(myAdapter);
 
-
-
-
-        // LoadData();
     }
 
-    private void LoadData() {
-       options = new FirebaseRecyclerOptions.Builder<Course>().
-               setQuery(DataRef,Course.class).build();
-
-
-        adapter = new FirebaseRecyclerAdapter<Course, MyViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Course model) {
-                holder.textView.setText(model.getCourseName());
-                holder.imageView.setImageURI(Uri.parse(model.getImage()));
-                holder.view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent(getApplicationContext(),ShowCourse.class);
-                        intent.putExtra("CourseId",model.getCourseId());
-                        intent.putExtra("ID",id);
-                        startActivity(intent);
-                    }
-                });
-
-
-            }
-
-
-            @NonNull
-            @Override
-            public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).
-                        inflate(R.layout.single_course,parent,false);
-                return new MyViewHolder(view);
-            }
-        };
-    }
 
     private ArrayList<Course> getMyList(){
         courses = new ArrayList<>();

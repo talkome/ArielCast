@@ -28,6 +28,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
 import static java.lang.System.currentTimeMillis;
 
 public class AddLectureActivity extends AppCompatActivity{
@@ -42,7 +47,7 @@ public class AddLectureActivity extends AppCompatActivity{
     StorageReference storageReference;
     DatabaseReference databaseReference;
     UploadTask uploadTask;
-    String lecturerEmail;
+    String lecturerEmail,lecId,cId;
 
 
     @Override
@@ -52,10 +57,12 @@ public class AddLectureActivity extends AppCompatActivity{
 
         lecture = new Lecture();
         storageReference = FirebaseStorage.getInstance().getReference().child("Video");
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("video");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Lectures");
 
         Intent intent=getIntent();
         lecturerEmail=intent.getExtras().getString("Email");
+        lecId=intent.getExtras().getString("ID");
+        cId=intent.getExtras().getString("CourseId");
 
         videoView = findViewById(R.id.videoview_main);
         addLec = findViewById(R.id.addLectureButton);
@@ -131,8 +138,17 @@ public class AddLectureActivity extends AppCompatActivity{
                             // get Email ( from Extras) from LecturerActivity
 
                             lecture.setLectureName(videoName);
+                            lecture.setLecturerId(lecId);
+                            lecture.setCourseId(cId);
                             lecture.setVideo_url(downloadUri.toString());
                             lecture.setSearch(search);
+
+                            Date presentTime_Date = Calendar.getInstance().getTime();
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                            String date= dateFormat.format(presentTime_Date);
+
+                            lecture.setDate(date);
                         //    lecture.setLecturerEmail(lecturerEmail); // id
                             databaseReference.child(videoName).setValue(lecture);
                             Intent i=new Intent(AddLectureActivity.this, LecturerActivity.class);

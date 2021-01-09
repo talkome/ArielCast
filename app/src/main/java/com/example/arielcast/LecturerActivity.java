@@ -28,7 +28,7 @@ public class LecturerActivity extends AppCompatActivity {
     // ArrayList<String> coursesList = new ArrayList<>();
     MyAdapter myAdapter;
     ArrayList<Course> courses ;
-    String email ,lecId,Id;
+    String email ,lecId;
     private String UserID;
 
     @Override
@@ -67,7 +67,7 @@ public class LecturerActivity extends AppCompatActivity {
                     // save lecturer's email and start AddLectureActivity
                     Intent i = new  Intent(LecturerActivity.this,AddCourseActivity.class);
                     i.putExtra("Email",email);
-                    i.putExtra("ID",lecId);
+                    i.putExtra("ID",UserID);
                     startActivity(i);
                 }
             }

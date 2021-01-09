@@ -1,7 +1,9 @@
 package com.example.arielcast.firebase.model.dataObject;
 
+import java.util.Date;
+
 public class Lecture {
-     String lectureId,lectureName,lecturerId, video_url, search,courseId;
+     String lectureId,lectureName,lecturerId, video_url, search,courseId, date;
 
     public Lecture() {
 
@@ -54,4 +56,13 @@ public class Lecture {
     public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
 }
