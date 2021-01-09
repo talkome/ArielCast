@@ -2,6 +2,7 @@ package com.example.arielcast.firebase.model.dataObject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -13,6 +14,8 @@ import com.example.arielcast.LecturerActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.UUID;
 
 public class Lecturer {
     String lecturerId;
@@ -43,13 +46,13 @@ public class Lecturer {
         this.phone=lec.getPhone();
     }
 
-    public void addCourse(Context t,ProgressBar progressBar,View v, EditText courseName,EditText semester,EditText year,EditText credits) {
-        //  while this id not exist already!!
-        Integer generatedId = generatRandomPositiveNegitiveValue(90000, 0); // Course id
+    public void addCourse(Context t, ProgressBar progressBar, View v, EditText courseName, EditText startDate, EditText endDate) {
 
-        Course course = new Course(generatedId, courseName.getText().toString().trim(), lecturerId, semester.getText().toString().trim(),
-                year.getText().toString().trim(), credits.getText().toString().trim(), "",0);
-        FirebaseDatabase.getInstance().getReference().child("Courses").child(String.valueOf(generatedId)).setValue(course)
+        String uniqueID = UUID.randomUUID().toString();
+
+        Course course = new Course(uniqueID, courseName.getText().toString().trim(), lecturerId, startDate.getText().toString().trim(),
+                endDate.getText().toString().trim(),"");
+        FirebaseDatabase.getInstance().getReference().child("Courses").child(uniqueID).setValue(course)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

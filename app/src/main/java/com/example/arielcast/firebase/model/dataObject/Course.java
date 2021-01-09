@@ -1,29 +1,32 @@
 package com.example.arielcast.firebase.model.dataObject;
 
+import android.net.Uri;
 import android.widget.ImageView;
 
 import java.text.SimpleDateFormat;
 
 public class Course
 {
-    int image;
-    Integer courseId;
+    String image;
+    String courseId;
     String courseName;
     String lecturerId;
     String startDate;
     String endDate;
 
 
+
     public Course() {
-        this.courseId = 0;
+        this.courseId = "";
         this.courseName = "";
         this.lecturerId = "";
         this.startDate = "";
         this.endDate = "";
-        this.image = 0;
+        this.image = "";
+
     }
 
-    public Course(Integer courseId, String courseName, String lecturerId, String start, String end, String description, int image) {
+    public Course(String courseId, String courseName, String lecturerId, String start, String end, String image) {
         this.courseId=courseId;
         this.courseName=courseName;
         this.lecturerId=lecturerId;
@@ -32,11 +35,11 @@ public class Course
         this.image = image;
     }
 
-    public void setCourseId(Integer courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 
-    public Integer getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
@@ -56,27 +59,28 @@ public class Course
         return lecturerId;
     }
 
-    public void setSemester(String startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public String getSemester() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setYear(String endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public String getYear() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
+
 }

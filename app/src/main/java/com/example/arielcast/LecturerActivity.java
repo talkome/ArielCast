@@ -58,42 +58,6 @@ public class LecturerActivity extends AppCompatActivity {
         coursesListView.setAdapter(myAdapter);
 
         myAdapter.notifyDataSetChanged();
-        
-/*
-        myRef = FirebaseDatabase.getInstance().getReference().child("Courses");
-
-                    Query myOrderPostsQuery = myRef.orderByChild("lecturerId").equalTo(lecId);
-
-                    myOrderPostsQuery.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot data : snapshot.getChildren()) {
-                                int index= Integer.parseInt(Objects.requireNonNull(data.getKey()));
-                                    String value = data.child("courseName").getValue(String.class);
-                                    coursesList.add(value);
-
-                                myAdapter.notifyDataSetChanged();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-
-               /*     coursesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent i = new  Intent(LecturerActivity.this,AddCourseActivity.class);
-                            i.putExtra("Email",email);
-                            i.putExtra("ID",lecId);
-                            startActivity(i);
-                        }
-                    });
-                    */
-
 
 
         // add lecture Button

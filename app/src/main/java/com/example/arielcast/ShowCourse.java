@@ -23,7 +23,7 @@ public class ShowCourse extends AppCompatActivity {
     Button deleteButton;
     DatabaseReference ref;
     int position;
-    String lecturername;
+    String lecId,email,cID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,9 @@ public class ShowCourse extends AppCompatActivity {
         deleteButton = findViewById(R.id.delete_button);
         ref = FirebaseDatabase.getInstance().getReference().child("Courses");
 
-        String email= getIntent().getExtras().getString("Email");
-        int cID=getIntent().getExtras().getInt("CourseId");
+         email= getIntent().getExtras().getString("Email");
+         lecId=getIntent().getExtras().getString("lecID");
+         cID=getIntent().getExtras().getString("CourseId");
 
        // Toast.makeText(ShowCourse.this,"Course ID : "+cID+" !",Toast.LENGTH_LONG).show();
 
@@ -49,15 +50,15 @@ public class ShowCourse extends AppCompatActivity {
                     String lecturerID = snapshot.child("lecturerId").getValue(String.class);
 
                     // get lecturer name
-                    Query q=FirebaseDatabase.getInstance().getReference().child("Lecturers").orderByChild("lecturerId").equalTo(lecturerID);
+                    DatabaseReference myRef= FirebaseDatabase.getInstance().getReference().child("Lecturers").child(lecId);
 
-                    q.addValueEventListener(new ValueEventListener() {
+                    myRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot data : snapshot.getChildren()) {
-                                lecturername = data.child("fullname").getValue(String.class);
-                                description.setText("Lecturer : "+lecturername);
-                            }
+                            String lecName=snapshot.child("fullname").getValue(String.class);
+
+                            description.setText(lecName);
+
                         }
 
                         @Override
@@ -67,7 +68,6 @@ public class ShowCourse extends AppCompatActivity {
                     });
 
                     title.setText(courseName);
-                    // description.setText("Lecturer : "+lecturername);
                 }
             }
 

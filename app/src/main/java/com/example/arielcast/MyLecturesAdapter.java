@@ -32,7 +32,7 @@ public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 @Override
 public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         holder.mTitle.setText(courses.get(position).getCourseName());
-        holder.mDes.setText(courses.get(position).getDescription());
+      //  holder.mDes.setText(courses.get(position).getDescription());
         //   holder.mImageView.setImageResource(courses.get(position).getImage());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 @Override
