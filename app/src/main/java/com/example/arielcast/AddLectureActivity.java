@@ -135,6 +135,7 @@ public class AddLectureActivity extends AppCompatActivity{
                             Toast.makeText(AddLectureActivity.this, "Data saved!",
                                     Toast.LENGTH_LONG).show();
 
+
                             // get Email ( from Extras) from LecturerActivity
 
                             lecture.setLectureName(videoName);

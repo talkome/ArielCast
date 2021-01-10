@@ -131,9 +131,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             if (snapshot.exists()) {
-                                                Intent intent=new Intent(LoginActivity.this, StudentActivity.class);
-                                                intent.putExtra("Email",email);
-                                                startActivity(intent);
+                                                for(DataSnapshot data:snapshot.getChildren()) {
+                                                    Intent intent = new Intent(LoginActivity.this, StudentActivity.class);
+                                                    String value = data.getKey();
+                                                    intent.putExtra("Email", email);
+                                                    intent.putExtra("ID", value);
+                                                    startActivity(intent);
+                                                }
                                             } else {
                                                 editTextEmail.setError("Please provide valid email");
                                                 editTextEmail.requestFocus();

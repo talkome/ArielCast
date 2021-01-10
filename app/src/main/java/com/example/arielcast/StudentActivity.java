@@ -77,13 +77,15 @@ public class StudentActivity extends AppCompatActivity {
 
         DataRef = FirebaseDatabase.getInstance().getReference().child("Courses");
 
-        myAdapter = new MyAdapter(this, getMyList(),id);
-        studentListView.setAdapter(myAdapter);
-
         // get student's email from MainActivity
         Intent intent = getIntent();
         email= intent.getExtras().getString("Email");
         id= intent.getExtras().getString("ID");
+
+        myAdapter = new MyAdapter(this, getMyList(),id);
+        studentListView.setAdapter(myAdapter);
+
+
 
         // LoadData();
     }

@@ -15,7 +15,7 @@ import com.example.arielcast.firebase.model.dataObject.Course;
 import com.squareup.picasso.Picasso;
 
 public class MyHolder extends RecyclerView.ViewHolder {
-    ImageView mImageView;
+    ImageView mImageView ,emailImage , plusImage;
     TextView mTitle, mDes;
 
     public MyHolder(@NonNull View itemView) {
@@ -23,6 +23,8 @@ public class MyHolder extends RecyclerView.ViewHolder {
         this.mImageView = itemView.findViewById(R.id.lecture_image);
         this.mTitle = itemView.findViewById(R.id.textViewMain);
         this.mDes = itemView.findViewById(R.id.textViewSub);
+        this.emailImage=itemView.findViewById(R.id.imageViewMail);
+        this.plusImage=itemView.findViewById(R.id.ImageViewPlus);
 
 
     }

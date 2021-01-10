@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.arielcast">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher_foreground"
@@ -10,16 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArielCast">
         <activity
+            android:name=".MailActivity"
+            android:label="@string/title_activity_mail"
+            android:theme="@style/Theme.ArielCast.NoActionBar"></activity>
+        <activity
             android:name=".ShowLecture"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".ShowCourse" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_lecturer"
             android:theme="@style/Theme.ArielCast.NoActionBar" />
         <activity android:name=".AddLectureActivity" />
-        <activity android:name=".StudentActivity"
+        <activity
+            android:name=".StudentActivity"
             android:label="@string/title_activity_lecturer"
             android:theme="@style/Theme.ArielCast.NoActionBar" />
         <activity android:name=".RegisterUser" />
@@ -32,6 +38,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

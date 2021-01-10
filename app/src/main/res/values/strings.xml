@@ -37,4 +37,5 @@
     <string name="login_password">login_password</string>
     <string name="logout">logout</string>
     <string name="search_course">Search Course</string>
+    <string name="title_activity_mail">MailActivity</string>
 </resources>

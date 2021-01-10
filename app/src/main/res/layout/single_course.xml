@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,32 +17,45 @@
         tools:srcCompat="@mipmap/ic_bannerlogo2_foreground" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="191dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/textViewMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:text="@string/main_title"
             android:textColor="#000"
-            android:textStyle="bold"
-            android:layout_margin="5dp"
             android:textSize="20sp"
-            android:id="@+id/textViewMain"
-            />
+            android:textStyle="bold" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/textViewSub"
+            android:layout_width="198dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:text="@string/sub_title"
             android:textColor="#a9a9a9"
-            android:textStyle="bold"
-            android:layout_margin="5dp"
             android:textSize="15sp"
-            android:id="@+id/textViewSub"
-            />
+            android:textStyle="bold" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewMail"
+        android:layout_width="49dp"
+        android:layout_height="68dp"
+        android:layout_weight="1"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
+
+    <ImageView
+        android:id="@+id/ImageViewPlus"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
+        android:layout_weight="1"
+        android:visibility="visible"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
 </LinearLayout>
