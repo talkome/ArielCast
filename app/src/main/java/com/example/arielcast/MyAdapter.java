@@ -99,11 +99,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
                            public void onClick(View v) {
                                // show students list - followers in this course
 
-//                               Intent intent=new Intent(context, popActivity.class);
-//                               intent.putExtra("CourseId",courses.get(position).getCourseId());
-//                               intent.putExtra("lecID",courses.get(position).getLecturerId());
-//                               intent.putExtra("ID",userId);
-//                               context.startActivity(intent);
+                               Intent intent=new Intent(context, StudentCoursesActivity.class);
+                               intent.putExtra("CourseId",courses.get(position).getCourseId());
+                               intent.putExtra("lecID",courses.get(position).getLecturerId());
+                               intent.putExtra("ID",userId);
+                               context.startActivity(intent);
                            }
                        });
 

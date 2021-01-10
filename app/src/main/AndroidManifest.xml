@@ -11,13 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ArielCast">
+        <activity android:name=".StudentCoursesActivity"></activity>
         <activity
             android:name=".MailActivity"
             android:label="@string/title_activity_mail"
-            android:theme="@style/Theme.ArielCast.NoActionBar"></activity>
+            android:theme="@style/Theme.ArielCast.NoActionBar" />
         <activity
             android:name=".ShowLecture"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ShowCourse" />
         <activity
             android:name=".MainActivity"
