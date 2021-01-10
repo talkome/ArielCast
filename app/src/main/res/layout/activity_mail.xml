@@ -25,7 +25,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="96dp"
         android:layout_marginBottom="45dp"
         android:text="Sending Mail"
         android:textSize="30dp"
@@ -37,7 +37,7 @@
         android:id="@+id/editTextTextPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="76dp"
         android:layout_marginBottom="179dp"
         android:ems="10"
         android:hint="Email Title"
@@ -72,11 +72,11 @@
         android:id="@+id/textInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+        android:layout_marginBottom="375dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2">
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,10 +84,22 @@
         android:id="@+id/textInputEditText"
         android:layout_width="346dp"
         android:layout_height="173dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="40dp"
         android:hint="your email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="71dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="350dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/appBarLayout2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable"
+        tools:srcCompat="?attr/homeAsUpIndicator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

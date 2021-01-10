@@ -115,6 +115,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
                                intent.putExtra("CourseId",courses.get(position).getCourseId());
                                intent.putExtra("lecID",courses.get(position).getLecturerId());
                                intent.putExtra("ID",userId);
+                               intent.putExtra("userKind","lecturer");
                                context.startActivity(intent);
                            }
                        });
@@ -128,12 +129,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
                                 for (DataSnapshot data : snapshot.getChildren()) {
                                     // if it's student user it's possible to follow this course
                                     // and student also can send email to lecturer's course .
+
+                                    //send email to lecturer of this course
+                                    holder.emailImage.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent=new Intent(context, MailActivity.class);
+                                            intent.putExtra("CourseId",courses.get(position).getCourseId());
+                                            intent.putExtra("lecID",courses.get(position).getLecturerId());
+                                            intent.putExtra("ID",userId);
+                                            intent.putExtra("userKind","student");
+                                            context.startActivity(intent);
+                                        }
+                                    });
                                     holder.plusImage.setVisibility(View.VISIBLE);
 
                                     // follow course
-                                 //   holder.plusImage.setOnClickListener(new View.OnClickListener() {
-                                    //    @Override
-                                     //   public void onClick(View v) {
+
                                             String SCId = userId+"-"+courses.get(position).getCourseId();
                                             StudentCourses user = new StudentCourses(userId, courses.get(position).getCourseId());
                                              DatabaseReference ref=FirebaseDatabase.getInstance().getReference("StudentCourses");
