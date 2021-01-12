@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +44,10 @@ public class MailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         textView=findViewById(R.id.textView1);
         title=findViewById(R.id.editTextTextPersonName);
@@ -88,43 +93,22 @@ public class MailActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 String email = snapshot.child("email").getValue(String.class);
 
-                            String fromEmail = "castariel01@gmail.com";
-                            String fromPassword = "cast123456";
-                            String toEmails = "hodaya_s@hotmail.com";
-                            List<String> toEmailList = Arrays.asList(toEmails
-                                    .split("\\s*,\\s*"));
-
-                            String emailSubject =title.toString();
-                            String emailBody = content.toString();
-
                             try {
                                 GMailSender sender = new GMailSender("castariel01@gmail.com", "cast123456");
-                                sender.sendMail(title.toString(),
-                                        content.toString(),
+                                sender.sendMail(title.getText().toString().trim(),
+                                        content.getText().toString().trim(),
                                         "castariel01@gmail.com",
-                                        "hodaya_s@hotmal.com");
+                                        email);
+
                                 Toast.makeText(MailActivity.this,
                                         "email sent !",
                                         Toast.LENGTH_LONG).show();
+
                             } catch (Exception e) {
                                 Toast.makeText(MailActivity.this,
                                         "email not sent !",
                                         Toast.LENGTH_LONG).show();
                             }
-
-//                            Intent emailintent = new Intent(Intent.ACTION_SEND);
-//                            emailintent.setType("message/rfc822");
-//                            emailintent.putExtra(Intent.EXTRA_EMAIL, new String[] { "hodaya_s@hotmail.com" });
-//                            emailintent.putExtra(Intent.EXTRA_SUBJECT, title.toString());
-//                            emailintent.putExtra(Intent.EXTRA_TEXT, content.toString());
-//                            try {
-//                                startActivity(Intent.createChooser(emailintent, title.toString()));
-//                                Toast.makeText(MailActivity.this,
-//                                        "email sent !",
-//                                        Toast.LENGTH_LONG).show();
-//                            } catch (android.content.ActivityNotFoundException ex) {
-//                                Toast.makeText(MailActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-//                            }
 
                         }
 
@@ -138,6 +122,68 @@ public class MailActivity extends AppCompatActivity {
                 {
                     // get list of followers (students) of this course
                     // and find their email - send massage all followers
+
+                    // get lecturer email by lecId
+                    Query query = FirebaseDatabase.getInstance().getReference().child("Courses").child(cId);
+
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String courseId = snapshot.child("courseId").getValue(String.class);
+
+                            //find students following
+                            Query quS = FirebaseDatabase.getInstance().getReference().child("StudentCourses").orderByChild("courseId").equalTo(cId);
+                            quS.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    for(DataSnapshot data:snapshot.getChildren())
+                                    {
+                                        String studenti=data.child("studentId").getValue(String.class);
+                                        Query qs=FirebaseDatabase.getInstance().getReference().child("Students").child(studenti);
+                                        qs.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                String stuemail=snapshot.child("email").getValue(String.class);
+                                                try {
+                                                    GMailSender sender = new GMailSender("castariel01@gmail.com", "cast123456");
+                                                    sender.sendMail(title.getText().toString().trim(),
+                                                            content.getText().toString().trim(),
+                                                            "castariel01@gmail.com",
+                                                            stuemail);
+
+                                                    Toast.makeText(MailActivity.this,
+                                                            "email sent !",
+                                                            Toast.LENGTH_LONG).show();
+
+                                                } catch (Exception e) {
+                                                    Toast.makeText(MailActivity.this,
+                                                            "email not sent !",
+                                                            Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+
+                        }
+
+                        @Override
+                        public void onCancelled (@NonNull DatabaseError error){
+
+                        }
+                    });
 
                 }
             }

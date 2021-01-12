@@ -1,5 +1,8 @@
 package com.example.arielcast;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,9 +54,13 @@ public class GMailSender extends javax.mail.Authenticator {
     }
 
     public synchronized void sendMail(String subject, String body, String sender, String recipients) throws Exception {
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
         try{
             MimeMessage message = new MimeMessage(session);
-            DataHandler handler = new DataHandler((javax.activation.DataSource) new ByteArrayDataSource(body.getBytes(), "text/plain"));
+            DataHandler handler = new DataHandler( new ByteArrayDataSource(body.getBytes(), "text/plain"));
             message.setSender(new InternetAddress(sender));
             message.setSubject(subject);
             message.setDataHandler(handler);
@@ -62,9 +69,15 @@ public class GMailSender extends javax.mail.Authenticator {
             else
                 message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipients));
             Transport.send(message);
-        }catch(Exception e){
 
+
+        }catch(Exception e){
+            System.out.println(e);
         }
+            }
+        });
+        thread.start();
+
     }
 
 
