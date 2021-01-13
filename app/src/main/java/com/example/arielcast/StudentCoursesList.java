@@ -1,12 +1,5 @@
 package com.example.arielcast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,13 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.arielcast.firebase.model.dataObject.Course;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class StudentActivity extends AppCompatActivity {
+public class StudentCoursesList extends AppCompatActivity {
     RecyclerView studentListView;
     EditText inputSearch;
     MyAdapter myAdapter;
@@ -49,7 +48,7 @@ public class StudentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student);
+        setContentView(R.layout.activity_studentcourseslist);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         studentListView = findViewById(R.id.recycleView);
@@ -73,7 +72,7 @@ public class StudentActivity extends AppCompatActivity {
             }
         });
 
-        setSupportActionBar(toolbar);
+       // setSupportActionBar(toolbar);
 
         DataRef = FirebaseDatabase.getInstance().getReference().child("Courses");
 
@@ -115,7 +114,7 @@ public class StudentActivity extends AppCompatActivity {
         }
         if(item.getItemId()==R.id.myCourses)
         {
-            Intent intent=new Intent(StudentActivity.this,StudentCoursesList.class);
+            Intent intent=new Intent(StudentCoursesList.this,StudentCoursesList.class);
             intent.putExtra("ID",id);
             intent.putExtra("Email",email);
             startActivity(intent);
@@ -125,12 +124,12 @@ public class StudentActivity extends AppCompatActivity {
 
     private void logOut() {
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(StudentActivity.this, LoginActivity.class));
+        startActivity(new Intent(StudentCoursesList.this, LoginActivity.class));
     }
 
     private void LoadData() {
-       options = new FirebaseRecyclerOptions.Builder<Course>().
-               setQuery(DataRef,Course.class).build();
+        options = new FirebaseRecyclerOptions.Builder<Course>().
+                setQuery(DataRef,Course.class).build();
 
 
         adapter = new FirebaseRecyclerAdapter<Course, MyViewHolder>(options) {
@@ -164,23 +163,40 @@ public class StudentActivity extends AppCompatActivity {
     private ArrayList<Course> getMyList(){
         courses = new ArrayList<>();
 
-               Query q = FirebaseDatabase.getInstance().getReference().child("Courses");
+        Query q1 = FirebaseDatabase.getInstance().getReference().child("StudentCourses").orderByChild("studentId").equalTo(id);
 
-                q.addValueEventListener(new ValueEventListener() {
-                    @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot data : snapshot.getChildren()) {
-                            Course c = data.getValue(Course.class);
-                            courses.add(c);
-                            myAdapter.notifyDataSetChanged();
+        q1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+
+                    String c1=data.child("courseId").getValue(String.class);
+                    Query q = FirebaseDatabase.getInstance().getReference().child("Courses").orderByChild("courseId").equalTo(c1);
+
+                    q.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot data : snapshot.getChildren()) {
+                                Course c = data.getValue(Course.class);
+                                courses.add(c);
+                                myAdapter.notifyDataSetChanged();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         return courses;
     }

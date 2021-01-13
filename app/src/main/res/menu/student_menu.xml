@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="My Courses" />
-    <item android:title="Watch later Playlist" />
+    <item
+        android:id="@+id/myCourses"
+        android:title="My Courses" />
+    <item
+        android:id="@+id/watchLater"
+        android:title="Watch later Playlist" />
     <item android:id="@+id/logout"
         android:title="@string/logout"/>
 

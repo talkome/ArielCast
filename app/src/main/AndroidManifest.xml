@@ -31,6 +31,7 @@
             android:theme="@style/Theme.ArielCast.NoActionBar" />
         <activity android:name=".RegisterUser" />
         <activity android:name=".AddCourseActivity" />
+        <activity android:name=".StudentCoursesList"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
