@@ -50,7 +50,6 @@ public class StudentCoursesList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studentcourseslist);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
         studentListView = findViewById(R.id.recycleView);
         studentListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         studentListView.setHasFixedSize(true);
@@ -71,8 +70,6 @@ public class StudentCoursesList extends AppCompatActivity {
                 filter(s.toString());
             }
         });
-
-       // setSupportActionBar(toolbar);
 
         DataRef = FirebaseDatabase.getInstance().getReference().child("Courses");
 

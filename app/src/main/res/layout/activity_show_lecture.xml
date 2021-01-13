@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
@@ -10,21 +11,92 @@
 
     <VideoView
         android:id="@+id/lecture_view"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:backgroundTint="@android:color/black" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/lecture_name"
-        android:textSize="20sp"
         android:id="@+id/et_video_name"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/design_default_color_background"
-        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="136dp"
         android:autofillHints="@string/arielcast"
+        android:backgroundTint="@color/design_default_color_background"
+        android:hint="@string/lecture_name"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lecture_view"
         tools:ignore="TextFields" />
 
+    <TextView
+        android:id="@+id/textViewSub_lecName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="14dp"
+        android:text="@string/sub_title"
+        android:textColor="#a9a9a9"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSub_date"
+        app:layout_constraintStart_toStartOf="@+id/et_video_name"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4" />
 
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="41dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="68dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSub_lecName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/et_video_name"
+        app:layout_constraintTop_toBottomOf="@+id/lecture_view"
+        app:srcCompat="@drawable/capture1212" />
+
+    <TextView
+        android:id="@+id/textViewSub_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="29dp"
+        android:text="@string/sub_title"
+        android:textColor="#a9a9a9"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/deleteButton"
+        app:layout_constraintStart_toStartOf="@+id/textViewSub_lecName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSub_lecName" />
+
+    <ImageButton
+        android:id="@+id/editButton"
+        android:layout_width="116dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="138dp"
+        app:layout_constraintBottom_toBottomOf="@+id/deleteButton"
+        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/deleteButton"
+        app:srcCompat="@drawable/edit_button" />
+
+    <ImageButton
+        android:id="@+id/deleteButton"
+        android:layout_width="123dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="311dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editButton"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSub_date"
+        app:srcCompat="@drawable/delete_button" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
