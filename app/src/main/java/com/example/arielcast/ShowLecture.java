@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -37,7 +36,7 @@ public class ShowLecture extends AppCompatActivity {
         lecture_name = findViewById(R.id.et_video_name);
         lecNameText=findViewById(R.id.textViewSub_lecName);
         dateText=findViewById(R.id.textViewSub_date);
-        editButton=findViewById(R.id.editButton);
+        editButton=findViewById(R.id.editButton5);
         deleteButton=findViewById(R.id.deleteButton);
         addToPlaylist=findViewById(R.id.imageButton4);
 

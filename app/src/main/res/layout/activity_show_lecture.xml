@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewSub_lecName" />
 
     <ImageButton
-        android:id="@+id/editButton"
+        android:id="@+id/editButton5"
         android:layout_width="116dp"
         android:layout_height="49dp"
         android:layout_marginStart="138dp"
@@ -94,7 +94,7 @@
         android:layout_marginBottom="311dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editButton"
+        app:layout_constraintStart_toEndOf="@+id/editButton5"
         app:layout_constraintTop_toBottomOf="@+id/textViewSub_date"
         app:srcCompat="@drawable/delete_button" />
 

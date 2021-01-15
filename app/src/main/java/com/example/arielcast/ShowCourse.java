@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,13 +38,14 @@ public class ShowCourse extends AppCompatActivity {
     FirebaseRecyclerAdapter<Course,MyViewHolder> adapter;
     ArrayList<Lecture> lectures ;
     TextView title, description;
-    Button deleteButton;
+    ImageButton deleteButton ,editButton;
     FloatingActionButton fab;
     DatabaseReference ref;
     int position;
     String Id,email,cID;
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference DataRef;
+    Dialog myDialog;
 
 
     @Override
@@ -52,7 +56,8 @@ public class ShowCourse extends AppCompatActivity {
         imageView = findViewById(R.id.lecture_image);
         title = findViewById(R.id.textViewMain);
         description = findViewById(R.id.textViewSub);
-        deleteButton = findViewById(R.id.delete_button);
+        deleteButton = findViewById(R.id.deleteButton5);
+        editButton = findViewById(R.id.editButton5);
         fab=findViewById(R.id.floatingActionButton);
         ref = FirebaseDatabase.getInstance().getReference().child("Courses");
 
@@ -132,10 +137,60 @@ public class ShowCourse extends AppCompatActivity {
                     for(DataSnapshot data:snapshot.getChildren()) {
                         fab.setVisibility(View.VISIBLE);
                         deleteButton.setVisibility(View.VISIBLE);
+                        editButton.setVisibility(View.VISIBLE);
+
+                        //delete course :
+                        deleteButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                myDialog =new Dialog(ShowCourse.this);
+                                myDialog.setContentView(R.layout.delete_course_dialog);
+                                myDialog.setTitle("Delete this course ?");
+                                TextView hello=(TextView) myDialog.findViewById(R.id.hello);
+                                Button db=(Button)myDialog.findViewById(R.id.db) ;
+                                Button cb=(Button)myDialog.findViewById(R.id.cb) ;
+                                ImageView iv=(ImageView)myDialog.findViewById(R.id.imv) ;
+                                myDialog.show();
+                                cb.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        myDialog.cancel();
+                                    }
+                                });
+                                db.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        DatabaseReference refe=FirebaseDatabase.getInstance().getReference().child("Courses");
+                                        refe.child(cID).removeValue();
+                                        Intent i=new Intent(ShowCourse.this, MainActivity.class);
+                                        i.putExtra("ID",Id);
+                                        i.putExtra("Email",email);
+                                        startActivity(i);
+                                    }
+                                });
+                            }
+                        });
                     }
                 } else {
-                                  fab.setVisibility(View.GONE);
-                                  deleteButton.setVisibility(View.GONE);
+                    Query query = myRef.child("Students").orderByChild("studentId").equalTo(Id);
+
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                             @Override
+                                                             public void onDataChange(DataSnapshot snapshot) {
+                                                                 if (snapshot.exists()) {
+                                                                     for (DataSnapshot data : snapshot.getChildren()) {
+                                                                         fab.setVisibility(View.INVISIBLE);
+                                                                         deleteButton.setVisibility(View.INVISIBLE);
+                                                                         editButton.setVisibility(View.INVISIBLE);
+                                                                     }
+                                                                 }
+                                                             }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
 
                 }
             }
