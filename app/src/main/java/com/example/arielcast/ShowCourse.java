@@ -162,12 +162,38 @@ public class ShowCourse extends AppCompatActivity {
                                     public void onClick(View v) {
                                         DatabaseReference refe=FirebaseDatabase.getInstance().getReference().child("Courses");
                                         refe.child(cID).removeValue();
+
+                                        // delete lectures of this course
+                                        Query leq=FirebaseDatabase.getInstance().getReference().child("Lectures").orderByChild("courseId").equalTo(cID);
+
+                                        leq.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                for(DataSnapshot data:snapshot.getChildren())
+                                                {
+                                                    data.getRef().removeValue();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
                                         Intent i=new Intent(ShowCourse.this, MainActivity.class);
                                         i.putExtra("ID",Id);
                                         i.putExtra("Email",email);
                                         startActivity(i);
                                     }
                                 });
+                            }
+                        });
+
+                        // edit course : name ,StartDate ,EndDate ,image
+                        editButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // TODO : edit course
                             }
                         });
                     }

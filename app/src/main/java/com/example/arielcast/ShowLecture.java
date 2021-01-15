@@ -3,11 +3,15 @@ package com.example.arielcast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -27,6 +31,7 @@ public class ShowLecture extends AppCompatActivity {
     TextView lecNameText , dateText;
     DatabaseReference dataRef;
     String lecturername;
+    Dialog myDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,40 @@ public class ShowLecture extends AppCompatActivity {
                         editButton.setVisibility(View.VISIBLE);
                         deleteButton.setVisibility(View.VISIBLE);
                         addToPlaylist.setVisibility(View.INVISIBLE);
+
+                        //delete lecture :
+
+                        deleteButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                myDialog =new Dialog(ShowLecture.this);
+                                myDialog.setContentView(R.layout.delete_course_dialog);
+                                myDialog.setTitle("Delete this lecture ?");
+                                TextView hello=(TextView) myDialog.findViewById(R.id.hello);
+                                hello.setText("Are you sure you want to delete this lecture ?");
+                                Button db=(Button)myDialog.findViewById(R.id.db) ;
+                                Button cb=(Button)myDialog.findViewById(R.id.cb) ;
+                                db.setText("Delete this lecture");
+                                ImageView iv=(ImageView)myDialog.findViewById(R.id.imv) ;
+                                myDialog.show();
+                                cb.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        myDialog.cancel();
+                                    }
+                                });
+                                db.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        DatabaseReference refe=FirebaseDatabase.getInstance().getReference().child("Lectures");
+                                        refe.child(lectureID).removeValue();
+                                        Intent i=new Intent(ShowLecture.this, MainActivity.class);
+                                        i.putExtra("ID",id);
+                                        startActivity(i);
+                                    }
+                                });
+                            }
+                        });
                     }
                 } else {
                     editButton.setVisibility(View.INVISIBLE);
@@ -80,7 +119,8 @@ public class ShowLecture extends AppCompatActivity {
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                if(snapshot.exists())
+                {
                     videoPath = snapshot.child("video_url").getValue(String.class);
                     Uri uri = Uri.parse(videoPath);
                     videoView.setVideoURI(uri);
@@ -105,7 +145,7 @@ public class ShowLecture extends AppCompatActivity {
 
                         }
                     });
-//                }
+                }
             }
 
             @Override
