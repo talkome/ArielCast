@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(view.getId() == R.id.fab) {
 
-                    // save lecturer's email and start AddLectureActivity
+                    // save lecturer's email and start AddCourseActivity
                     Intent i = new  Intent(MainActivity.this, AddCourseActivity.class);
                     i.putExtra("Email",email);
                     i.putExtra("ID",lecId);

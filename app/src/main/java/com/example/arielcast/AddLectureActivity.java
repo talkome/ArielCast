@@ -152,10 +152,11 @@ public class AddLectureActivity extends AppCompatActivity{
                             lecture.setDate(date);
                         //    lecture.setLecturerEmail(lecturerEmail); // id
                             databaseReference.child(videoName).setValue(lecture);
-                            Intent i=new Intent(AddLectureActivity.this, ShowLecture.class);
+                            Intent i=new Intent(AddLectureActivity.this, ShowCourse.class);
                             i.putExtra("Email",lecturerEmail);
                             i.putExtra("ID",lecId);
                             i.putExtra("lecID",cId);
+                            i.putExtra("CourseId",cId);
                             startActivity(i);
                         } else {
                             Toast.makeText(AddLectureActivity.this, "Failed",
