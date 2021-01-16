@@ -142,10 +142,7 @@ public class StudentCoursesList extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-
-
             }
-
 
             @NonNull
             @Override

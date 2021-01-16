@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ArielCast">
-        <activity android:name=".StudentCoursesActivity"></activity>
+        <activity android:name=".WatchLaterActivity"></activity>
+        <activity android:name=".StudentCoursesActivity" />
         <activity
             android:name=".MailActivity"
             android:label="@string/title_activity_mail"
@@ -31,7 +32,7 @@
             android:theme="@style/Theme.ArielCast.NoActionBar" />
         <activity android:name=".RegisterUser" />
         <activity android:name=".AddCourseActivity" />
-        <activity android:name=".StudentCoursesList"></activity>
+        <activity android:name=".StudentCoursesList" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

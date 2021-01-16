@@ -3,6 +3,7 @@ package com.example.arielcast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -158,6 +159,12 @@ public class AddLectureActivity extends AppCompatActivity{
                             i.putExtra("lecID",cId);
                             i.putExtra("CourseId",cId);
                             startActivity(i);
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(
+                                    AddLectureActivity.this).setSmallIcon(R.drawable.
+                                    ic_baseline_chat_24).setContentTitle("new lecture was upload")
+                                    .setContentText("A New lecture " + lecture.getLectureName() +
+                                            " was upload to the course " + lecture.getCourseId())
+                                    .setAutoCancel(true);
                         } else {
                             Toast.makeText(AddLectureActivity.this, "Failed",
                                     Toast.LENGTH_SHORT).show();

@@ -85,8 +85,6 @@ public class StudentActivity extends AppCompatActivity {
         myAdapter = new MyAdapter(this, getMyList(),id);
         studentListView.setAdapter(myAdapter);
 
-
-
         // LoadData();
     }
 
@@ -131,8 +129,6 @@ public class StudentActivity extends AppCompatActivity {
     private void LoadData() {
        options = new FirebaseRecyclerOptions.Builder<Course>().
                setQuery(DataRef,Course.class).build();
-
-
         adapter = new FirebaseRecyclerAdapter<Course, MyViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Course model) {
@@ -146,8 +142,6 @@ public class StudentActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-
-
             }
 
 
