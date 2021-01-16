@@ -4,10 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -72,6 +76,12 @@ public class AddLectureActivity extends AppCompatActivity{
         mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
         videoView.start();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("My Notification","My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
 
         addLec.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,12 +169,14 @@ public class AddLectureActivity extends AppCompatActivity{
                             i.putExtra("lecID",cId);
                             i.putExtra("CourseId",cId);
                             startActivity(i);
-                            NotificationCompat.Builder builder = new NotificationCompat.Builder(
-                                    AddLectureActivity.this).setSmallIcon(R.drawable.
-                                    ic_baseline_chat_24).setContentTitle("new lecture was upload")
-                                    .setContentText("A New lecture " + lecture.getLectureName() +
-                                            " was upload to the course " + lecture.getCourseId())
-                                    .setAutoCancel(true);
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(AddLectureActivity.this, "My Notification");
+                            builder.setSmallIcon(R.drawable.ic_baseline_chat_24);
+                            builder.setContentTitle("new lecture was upload");
+                            builder.setContentText("A New lecture " + lecture.getLectureName() + " was upload to the course " + lecture.getCourseId());
+                            builder.setAutoCancel(true);
+
+                            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(AddLectureActivity.this);
+                            managerCompat.notify(1, builder.build());
                         } else {
                             Toast.makeText(AddLectureActivity.this, "Failed",
                                     Toast.LENGTH_SHORT).show();

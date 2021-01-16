@@ -88,12 +88,10 @@ public class ShowLecture extends AppCompatActivity {
                             Toast.makeText(ShowLecture.this,"added to Watch Later",
                                     Toast.LENGTH_LONG).show();
                         } else {
-
                             dataRef.child(SCId).removeValue();
                             Toast.makeText(ShowLecture.this,"removed from Watch Later",
                                     Toast.LENGTH_LONG).show();
                         }
-
                     }
 
                     @Override
