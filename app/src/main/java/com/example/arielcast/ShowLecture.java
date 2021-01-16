@@ -75,7 +75,7 @@ public class ShowLecture extends AppCompatActivity {
                                 myDialog.setTitle("Delete this lecture ?");
                                 TextView hello=(TextView) myDialog.findViewById(R.id.hello);
                                 hello.setText("Are you sure you want to delete this lecture ?");
-                                Button db=(Button)myDialog.findViewById(R.id.db) ;
+                                Button db=(Button)myDialog.findViewById(R.id.editb) ;
                                 Button cb=(Button)myDialog.findViewById(R.id.cb) ;
                                 db.setText("Delete this lecture");
                                 ImageView iv=(ImageView)myDialog.findViewById(R.id.imv) ;

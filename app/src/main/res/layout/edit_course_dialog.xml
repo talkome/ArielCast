@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80A6A2"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:contentDescription="ArielCast"
+        app:srcCompat="@drawable/capture222"
+        tools:srcCompat="@drawable/capture222" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/insertNewCourseName"
+            android:layout_width="255dp"
+            android:layout_height="wrap_content"
+            android:hint="courseName" />
+
+        <EditText
+            android:id="@+id/editTextStartDate"
+            android:layout_width="257dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Start Date"
+            android:inputType="date" />
+
+        <EditText
+            android:id="@+id/editTextEndDate"
+            android:layout_width="255dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="End Date"
+            android:inputType="date" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="181dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="175dp"
+                android:layout_height="104dp"
+                android:layout_gravity="left"
+                app:srcCompat="@drawable/ariel_logo" />
+
+            <Button
+                android:id="@+id/updateCourseImage"
+                android:layout_width="224dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                android:text="update course image"
+                android:theme="@style/myButtonTheme" />
+
+            <TextView
+                android:layout_width="378dp"
+                android:layout_height="wrap_content"
+                android:text=" "
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/editb"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:background="#6A6868"
+            android:text="Edit Course"
+            android:theme="@style/myButtonTheme" />
+
+        <Button
+            android:id="@+id/cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="cancle"
+            android:theme="@style/myButtonTheme" />
+
+
+    </LinearLayout>
+</LinearLayout>
