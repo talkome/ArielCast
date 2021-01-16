@@ -1,12 +1,8 @@
 package com.example.arielcast;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SharedMemory;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +20,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class LecturerActivity extends AppCompatActivity {
 
@@ -40,7 +35,7 @@ public class LecturerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        coursesListView = findViewById(R.id.recycleView);
+        coursesListView = findViewById(R.id.watch_later_recycleView);
         coursesListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         coursesListView.setHasFixedSize(true);
 
@@ -54,7 +49,7 @@ public class LecturerActivity extends AppCompatActivity {
         //show my courses
          myAdapter =new MyAdapter (this, getMyList(),lecId);
 
-        coursesListView = findViewById(R.id.recycleView);
+        coursesListView = findViewById(R.id.watch_later_recycleView);
         coursesListView.setAdapter(myAdapter);
 
         myAdapter.notifyDataSetChanged();

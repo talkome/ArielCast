@@ -15,7 +15,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="40dp"
         android:backgroundTint="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton4"
+        app:layout_constraintBottom_toTopOf="@+id/add_to_watch_later_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,7 @@
         android:hint="@string/lecture_name"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+        app:layout_constraintEnd_toStartOf="@+id/add_to_watch_later_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lecture_view"
         tools:ignore="TextFields" />
@@ -49,10 +49,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textViewSub_date"
         app:layout_constraintStart_toStartOf="@+id/et_video_name"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton4" />
+        app:layout_constraintTop_toBottomOf="@+id/add_to_watch_later_list" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/add_to_watch_later_list"
         android:layout_width="41dp"
         android:layout_height="37dp"
         android:layout_marginEnd="68dp"

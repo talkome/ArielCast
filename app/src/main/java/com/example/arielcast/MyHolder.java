@@ -25,8 +25,6 @@ public class MyHolder extends RecyclerView.ViewHolder {
         this.mDes = itemView.findViewById(R.id.textViewSub);
         this.emailImage=itemView.findViewById(R.id.imageViewMail);
         this.plusImage=itemView.findViewById(R.id.ImageViewPlus);
-
-
     }
 
 }

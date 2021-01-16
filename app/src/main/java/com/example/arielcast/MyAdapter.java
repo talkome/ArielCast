@@ -42,7 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     public MyAdapter(Context context, ArrayList<Course> courses, String userID) {
         this.context = context;
         this.courses = courses;
-        this.userId=userID;
+        this.userId = userID;
     }
 
     @NonNull
@@ -55,7 +55,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         holder.mTitle.setText(courses.get(position).getCourseName());
-
         holder.mImageView.findViewById(R.id.lecture_image);
 
        //  get uri from image link
@@ -71,7 +70,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String lecName=snapshot.child("fullname").getValue(String.class);
                 holder.mDes.setText(lecName);
-
             }
 
             @Override
@@ -80,25 +78,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
             }
         });
 
-
         //check if it's lecturer user
-
         Query query = FirebaseDatabase.getInstance().getReference().child("Lecturers").orderByChild("lecturerId").equalTo(userId);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                        // if it's lecturer user - > dont show plus button
+                        // if it's lecturer user - > don't show plus button
                         // and send email for all student tha follow this course
                     Drawable d = ContextCompat.getDrawable(context, R.drawable.peoplesnip);
                        holder.plusImage.setImageDrawable(d);
+
                        //open popUp window that show student that follow this course
                        holder.plusImage.setOnClickListener(new View.OnClickListener() {
                            @Override
                            public void onClick(View v) {
-                               // show students list - followers in this course
 
+                               // show students list - followers in this course
                                Intent intent=new Intent(context, StudentCoursesActivity.class);
                                intent.putExtra("CourseId",courses.get(position).getCourseId());
                                intent.putExtra("lecID",courses.get(position).getLecturerId());

@@ -50,7 +50,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewMain" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleView"
+            android:id="@+id/watch_later_recycleView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -80,7 +80,7 @@
             android:layout_height="33dp"
             android:layout_marginStart="50dp"
             android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/recycleView"
+            app:layout_constraintBottom_toTopOf="@+id/watch_later_recycleView"
             app:layout_constraintEnd_toStartOf="@+id/deleteButton5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewSub"

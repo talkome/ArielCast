@@ -1,7 +1,6 @@
 package com.example.arielcast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,15 +17,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.arielcast.firebase.model.dataObject.Course;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,7 +48,7 @@ public class StudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        studentListView = findViewById(R.id.recycleView);
+        studentListView = findViewById(R.id.watch_later_recycleView);
         studentListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         studentListView.setHasFixedSize(true);
         inputSearch = findViewById(R.id.inputSearch);
@@ -111,9 +107,14 @@ public class StudentActivity extends AppCompatActivity {
             logOut();
             return true;
         }
-        if(item.getItemId()==R.id.myCourses)
-        {
+        if(item.getItemId()==R.id.myCourses) {
             Intent intent=new Intent(StudentActivity.this,StudentCoursesList.class);
+            intent.putExtra("ID",id);
+            intent.putExtra("Email",email);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.watchLater) {
+            Intent intent=new Intent(StudentActivity.this,WatchLaterActivity.class);
             intent.putExtra("ID",id);
             intent.putExtra("Email",email);
             startActivity(intent);
@@ -143,7 +144,6 @@ public class StudentActivity extends AppCompatActivity {
                     }
                 });
             }
-
 
             @NonNull
             @Override

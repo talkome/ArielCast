@@ -1,14 +1,13 @@
 package com.example.arielcast;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +22,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -31,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String FILE_NAME = "com.example.arielcast.MainActivity.FILE_NAME";
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        coursesListView = findViewById(R.id.recycleView);
+        coursesListView = findViewById(R.id.watch_later_recycleView);
         coursesListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         coursesListView.setHasFixedSize(true);
 
@@ -59,11 +58,10 @@ public class MainActivity extends AppCompatActivity {
         //show my courses
         myAdapter = new MyAdapter (this, getMyList(),lecId);
 
-        coursesListView = findViewById(R.id.recycleView);
+        coursesListView = findViewById(R.id.watch_later_recycleView);
         coursesListView.setAdapter(myAdapter);
 
         myAdapter.notifyDataSetChanged();
-
 
         // add lecture Button
         FloatingActionButton fab = findViewById(R.id.fab);

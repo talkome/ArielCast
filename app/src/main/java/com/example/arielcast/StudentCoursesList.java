@@ -11,14 +11,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,7 +46,7 @@ public class StudentCoursesList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_studentcourseslist);
 
-        studentListView = findViewById(R.id.recycleView);
+        studentListView = findViewById(R.id.watch_later_recycleView);
         studentListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         studentListView.setHasFixedSize(true);
         inputSearch = findViewById(R.id.inputSearch);
@@ -81,8 +77,6 @@ public class StudentCoursesList extends AppCompatActivity {
         myAdapter = new MyAdapter(this, getMyList(),id);
         studentListView.setAdapter(myAdapter);
 
-
-
         // LoadData();
     }
 
@@ -109,8 +103,7 @@ public class StudentCoursesList extends AppCompatActivity {
             logOut();
             return true;
         }
-        if(item.getItemId()==R.id.myCourses)
-        {
+        if(item.getItemId() == R.id.myCourses) {
             Intent intent=new Intent(StudentCoursesList.this,StudentCoursesList.class);
             intent.putExtra("ID",id);
             intent.putExtra("Email",email);

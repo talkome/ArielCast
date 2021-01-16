@@ -40,7 +40,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView"
+        android:id="@+id/watch_later_recycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -40,7 +40,6 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -80,7 +79,7 @@ public class ShowCourse extends AppCompatActivity {
         fab=findViewById(R.id.floatingActionButton);
         ref = FirebaseDatabase.getInstance().getReference().child("Courses");
 
-        lecturesListView = findViewById(R.id.recycleView);
+        lecturesListView = findViewById(R.id.watch_later_recycleView);
         lecturesListView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         lecturesListView.setHasFixedSize(true);
         DataRef = FirebaseDatabase.getInstance().getReference().child("Courses");
@@ -129,7 +128,6 @@ public class ShowCourse extends AppCompatActivity {
                             String lecName=snapshot.child("fullname").getValue(String.class);
 
                             description.setText(lecName);
-
                         }
 
                         @Override
@@ -296,16 +294,16 @@ public class ShowCourse extends AppCompatActivity {
                     Query query = myRef.child("Students").orderByChild("studentId").equalTo(Id);
 
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                             @Override
-                                                             public void onDataChange(DataSnapshot snapshot) {
-                                                                 if (snapshot.exists()) {
-                                                                     for (DataSnapshot data : snapshot.getChildren()) {
-                                                                         fab.setVisibility(View.INVISIBLE);
-                                                                         deleteButton.setVisibility(View.INVISIBLE);
-                                                                         editButton.setVisibility(View.INVISIBLE);
-                                                                     }
-                                                                 }
-                                                             }
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                for (DataSnapshot data : snapshot.getChildren()) {
+                                    fab.setVisibility(View.INVISIBLE);
+                                    deleteButton.setVisibility(View.INVISIBLE);
+                                    editButton.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
@@ -326,13 +324,12 @@ public class ShowCourse extends AppCompatActivity {
 
     public void onfabClick(View v)
     {
-            // save lecturer's email and start AddLectureActivity
-            Intent i = new Intent(ShowCourse.this, AddLectureActivity.class);
-            i.putExtra("Email", email);
-            i.putExtra("ID", Id);
-            i.putExtra("CourseId", cID);
-            startActivity(i);
-
+        // save lecturer's email and start AddLectureActivity
+        Intent i = new Intent(ShowCourse.this, AddLectureActivity.class);
+        i.putExtra("Email", email);
+        i.putExtra("ID", Id);
+        i.putExtra("CourseId", cID);
+        startActivity(i);
     }
 
 
@@ -341,7 +338,6 @@ public class ShowCourse extends AppCompatActivity {
         lectures = new ArrayList<>();
 
         Query q = FirebaseDatabase.getInstance().getReference().child("Lectures").orderByChild("courseId").equalTo(cID);;
-
 
         q.addValueEventListener(new ValueEventListener() {
             @Override
@@ -376,9 +372,9 @@ public class ShowCourse extends AppCompatActivity {
     }
 
     private String getExt(Uri uri){
-        ContentResolver contentResolver = getContentResolver(); //
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton(); //
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)); //
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
 }
